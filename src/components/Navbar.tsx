@@ -83,7 +83,7 @@ export default function Navbar() {
 
       {/* 🔹 Logo + Title */}
       <div className="flex items-center justify-center py-10 bg-white relative min-h-[250px] md:min-h-[500px]">
-        <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0 opacity-80">
           <img
             src="/logo.png"
             alt="Background Logo"
