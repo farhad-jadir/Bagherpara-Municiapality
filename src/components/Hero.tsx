@@ -1,6 +1,7 @@
 "use client";
 
 import { FaFilePdf } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -16,12 +17,12 @@ export default function Hero() {
           <p className="text-lg mb-6">
             নাগরিক সেবা, আইন-নীতিমালা, পরিকল্পনা ও যোগাযোগ সম্পর্কিত সকল তথ্য এখানে পাওয়া যাবে।
           </p>
-          <a
+          <Link
             href="/"
             className="inline-block bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-yellow-300 transition"
           >
             আরও জানুন →
-          </a>
+          </Link>
         </div>
 
         {/* Right side: Office Orders Table */}
@@ -64,12 +65,12 @@ export default function Hero() {
           </table>
 
           <div className="bg-gray-100 px-4 py-2 text-right">
-            <a
-              href="#"
+            <Link
+              href="/office-orders"
               className="text-green-700 font-medium hover:underline"
             >
               সব অফিস আদেশ →
-            </a>
+            </Link>
           </div>
         </div>
       </div>
