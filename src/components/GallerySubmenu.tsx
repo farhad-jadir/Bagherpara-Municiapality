@@ -20,13 +20,34 @@ export default function GallerySubmenu() {
   return (
     <div className="relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="px-3 py-2 transition-all duration-300 hover:border-b-2 hover:border-red-600 hover:text-red-600 focus:outline-none"
-        aria-expanded={isOpen}
-        aria-haspopup="true"
-      >
-        গ্যালারী
-      </button>
+  onClick={() => setIsOpen(!isOpen)}
+  className="relative group px-5 py-2 font-bold text-indigo-700 
+             border-2 border-indigo-600 rounded-xl 
+             bg-gradient-to-r from-indigo-50 to-white
+             shadow-md hover:shadow-lg
+             transition-all duration-500 ease-in-out 
+             overflow-hidden"
+  aria-expanded={isOpen}
+  aria-haspopup="true"
+>
+  {/* 🔹 Default Text */}
+  <span className="flex items-center gap-2 relative z-10">
+    📷 গ্যালারি
+  </span>
+
+  {/* 🔹 Hover Gradient Background */}
+  <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 
+                   opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+
+  {/* 🔹 Hover Text */}
+  <span className="absolute inset-0 flex items-center justify-center font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+    📷 গ্যালারি
+  </span>
+
+  {/* 🔹 Bottom Border Animation */}
+  <span className="absolute bottom-0 left-0 w-0 h-[3px] bg-blue-500 group-hover:w-full transition-all duration-500"></span>
+</button>
+
       
       {isOpen && (
         <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">

@@ -20,13 +20,34 @@ export default function FormsSubmenu() {
   return (
     <div className="relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="px-3 py-2 transition-all duration-300 hover:border-b-2 hover:border-red-600 hover:text-red-600 focus:outline-none"
-        aria-expanded={isOpen}
-        aria-haspopup="true"
-      >
-        ফরম
+           onClick={() => setIsOpen(!isOpen)}
+             className="relative group px-5 py-2 font-normal text-white 
+             
+             
+             shadow-md hover:shadow-lg
+             transition-all duration-500 ease-in-out 
+             overflow-hidden cursor-pointer"
+             aria-expanded={isOpen}
+             aria-haspopup="true"
+>
+  {/* 🔹 Text with Icon */}
+  <span className="flex items-center gap-2 relative z-10 cursor-pointer">
+    📑 ফরম
+  </span>
+
+  {/* 🔹 Hover Background Glow */}
+  <span className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded
+                   opacity-0 group-hover:opacity-100 transition-opacity duration-500 "></span>
+
+  {/* 🔹 Text Color Animation */}
+  <span className="absolute inset-0 flex items-center justify-center font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+    📑 ফরম
+  </span>
+
+  {/* 🔹 Animated Border Effect */}
+  <span className="absolute bottom-0 left-0 w-0 h-[3px] bg-red-500 group-hover:w-full transition-all duration-500"></span>
       </button>
+
       
       {isOpen && (
         <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
