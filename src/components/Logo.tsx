@@ -53,10 +53,10 @@ export default function MainHeader() {
                 <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
               </div>
               <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-800 group-hover:text-purple-700 transition-colors">
-                  বাঘারপাড়া পৌরসভা
+                <h1 className="text-base font-bold text-gray-800 group-hover:text-purple-700 transition-colors">
+                  Bagharapara Municipality
                 </h1>
-                <p className="text-sm text-gray-600">Bagharapara Municipality</p>
+                <p className="text-sm text-gray-600"></p>
               </div>
             </Link>
           </div>
