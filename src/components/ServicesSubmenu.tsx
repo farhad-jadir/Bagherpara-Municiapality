@@ -1,7 +1,7 @@
 // components/ServicesSubmenu.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 
 interface SubmenuItem {
@@ -11,6 +11,7 @@ interface SubmenuItem {
 
 export default function ServicesSubmenu() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const submenuItems: SubmenuItem[] = [
     { title: "ট্রেড লাইসেন্স ইস্যু ও নবায়ন পদ্ধতি", href: "/services/trade-license" },
@@ -21,7 +22,7 @@ export default function ServicesSubmenu() {
     { title: "বাজার", href: "/services/market" },
     { title: "বাঘারপাড়া স্বাস্থ কমপ্লেক্স", href: "/services/health-complex" },
     { title: "কবরস্থান/শ্মশানঘাট", href: "/services/cemetery" },
-    { title: "শরীর চর্চা কেন্দ্র (ব্যায়ামাগার)", href: "/services/gymnasium" },
+    { title: "শরীর চর্চা কেন্দ্র (ব্যায়ামাগار)", href: "/services/gymnasium" },
     { title: "সামাজিক অনুষ্ঠান কেন্দ্র (কমিউনিটি সেন্টার)", href: "/services/community-center" },
     { title: "স্কুল, কলেজ ও মাদ্রাসা", href: "/services/educational-institutions" },
     { title: "পাঠাগার", href: "/services/library" },
@@ -40,39 +41,58 @@ export default function ServicesSubmenu() {
     submenuItems.slice(columnSize * 2),
   ];
 
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 300);
+  };
+
   return (
-    <div className="relative">
+    <div 
+      className="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <button
-  onClick={() => setIsOpen(!isOpen)}
-  className="relative group px-5 py-2 font-normal text-white
-             
-             shadow-md hover:shadow-lg
-             transition-all duration-500 ease-in-out 
-             overflow-hidden cursor-pointer animate-pulse-color"
-  aria-expanded={isOpen}
-  aria-haspopup="true"
->
-  {/* 🔹 Default Text */}
-  <span className="flex items-center relative z-10">
-    🛎️ সেবাসমূহ
-  </span>
+        className="relative group px-4 py-2 font-normal text-white
+                   shadow-md hover:shadow-lg
+                   transition-all duration-500 ease-in-out 
+                   overflow-hidden cursor-pointer animate-pulse-color"
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+      >
+        {/* 🔹 Default Text */}
+        <span className="flex items-center relative z-10">
+          🛎️ সেবাসমূহ
+        </span>
 
-  {/* 🔹 Hover Gradient Background */}
-  <span className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 
-                   opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded"></span>
+        {/* 🔹 Hover Gradient Background */}
+        <span className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 
+                       opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded"></span>
 
-  {/* 🔹 Hover Text */}
-  <span className="absolute inset-0 flex items-center justify-center font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-    🛎️ সেবাসমূহ
-  </span>
+        {/* 🔹 Hover Text */}
+        <span className="absolute inset-0 flex items-center justify-center font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          🛎️ সেবাসমূহ
+        </span>
 
-  {/* 🔹 Bottom Border Animation */}
-  <span className="absolute bottom-0 left-0 w-0 h-[3px] bg-red-400 group-hover:w-full transition-all duration-500"></span>
+        {/* 🔹 Bottom Border Animation */}
+        <span className="absolute bottom-0 left-0 w-0 h-[3px] bg-red-400 group-hover:w-full transition-all duration-500"></span>
       </button>
 
       
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-[800px] bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+        <div 
+          className="absolute top-full left-0 mt-2 w-[800px] bg-white rounded-lg shadow-lg border border-gray-200 z-50"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <div className="grid grid-cols-3 gap-4 p-4">
             {columns.map((column, columnIndex) => (
               <div key={columnIndex} className="space-y-2">

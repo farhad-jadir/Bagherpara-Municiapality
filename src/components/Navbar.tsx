@@ -10,6 +10,8 @@ import ServicesSubmenu from "./ServicesSubmenu";
 import LawsSubmenu from "./LawsSubmenu";
 import FormsSubmenu from "./FormsSubmenu";
 import GallerySubmenu from "./GallerySubmenu";
+import ContactSubmenu from "./ContactSubmenu";
+import FaqSubmenu from "./FaqSubmenu";
 import { Search, Globe, Menu, X } from "lucide-react";
 
 interface MenuItem {
@@ -26,8 +28,6 @@ export default function Navbar() {
   const router = useRouter();
 
   const menuItems: MenuItem[] = [
-    { title: "জরুরী যোগাযোগ", href: "/contact" },
-    { title: "FAQ", href: "/faq" },
     { title: "পরিকল্পনা", href: "/plans" },
   ];
 
@@ -165,6 +165,12 @@ export default function Navbar() {
             </li>
             <li>
               <GallerySubmenu />
+            </li>
+            <li>
+              <ContactSubmenu />
+            </li>
+            <li>
+              <FaqSubmenu />
             </li>
 
             {menuItems.map((item: MenuItem) => (
