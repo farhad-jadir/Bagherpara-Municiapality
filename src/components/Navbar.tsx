@@ -13,6 +13,7 @@ import GallerySubmenu from "./GallerySubmenu";
 import ContactSubmenu from "./ContactSubmenu";
 import FaqSubmenu from "./FaqSubmenu";
 import PlansSubmenu from "./PlansSubmenu";
+import Logo from "./Logo";
 import { Search, Globe, Menu, X } from "lucide-react";
 
 interface MenuItem {
@@ -28,9 +29,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState<boolean>(false);
   const router = useRouter();
 
-  const menuItems: MenuItem[] = [
-    
-  ];
+  const menuItems: MenuItem[] = [];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +55,11 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`w-full  transition-all duration-300 ${scrolled ? "bg-white shadow-lg" : "bg-transparent"}`}>
+    <nav
+      className={`w-full transition-all duration-300 ${
+        scrolled ? "bg-white shadow-lg" : "bg-transparent"
+      }`}
+    >
       {/* 🔹 Top Header with Search */}
       <div className="bg-gradient-to-r from-purple-800 to-purple-600 text-white">
         <div className="container mx-auto px-4 py-3">
@@ -75,7 +78,9 @@ export default function Navbar() {
                 {/* Category Select */}
                 <select
                   value={category}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                    setCategory(e.target.value)
+                  }
                   className="bg-gray-100 text-gray-700 px-3 py-2 border-r border-gray-300 focus:outline-none text-sm"
                 >
                   <option value="অফিসের খবর">অফিসের খবর</option>
@@ -90,7 +95,9 @@ export default function Navbar() {
                     type="text"
                     placeholder="খুঁজুন..."
                     value={query}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setQuery(e.target.value)
+                    }
                     onKeyPress={handleKeyPress}
                     className="w-full px-4 py-2 text-gray-800 focus:outline-none text-sm"
                   />
@@ -113,69 +120,23 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* 🔹 Main Header with Logo */}
-      <div className="bg-white border-b">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-4">
-            {/* Logo and Title */}
-            <Link href="/" className="flex items-center group">
-              <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                  <span className="text-white font-bold text-lg">বাপ</span>
-                </div>
-                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
-              </div>
-              <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-800 group-hover:text-purple-700 transition-colors">
-                  বাঘারপাড়া পৌরসভা
-                </h1>
-                <p className="text-sm text-gray-600">Bagharapara Municipality</p>
-              </div>
-            </Link>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-            >
-              {menuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* 🔹 Main Header with 6 parts */}
+      <Logo/>
 
       {/* 🔹 Main Navigation */}
       <div className="bg-gradient-to-r from-purple-700 to-purple-800 shadow-lg">
         <div className="container mx-auto px-4">
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center justify-center space-x-1 py-3">
-            <li>
-              <AboutSubmenu />
-            </li>
-            <li>
-              <OfficersSubmenu />
-            </li>
-            <li>
-              <ServicesSubmenu />
-            </li>
-            <li>
-              <LawsSubmenu />
-            </li>
-            <li>
-              <FormsSubmenu />
-            </li>
-            <li>
-              <GallerySubmenu />
-            </li>
-            <li>
-              <ContactSubmenu />
-            </li>
-            <li>
-              <FaqSubmenu />
-            </li>
-            <li>
-              <PlansSubmenu />
-            </li>
+            <li><AboutSubmenu /></li>
+            <li><OfficersSubmenu /></li>
+            <li><ServicesSubmenu /></li>
+            <li><LawsSubmenu /></li>
+            <li><FormsSubmenu /></li>
+            <li><GallerySubmenu /></li>
+            <li><ContactSubmenu /></li>
+            <li><FaqSubmenu /></li>
+            <li><PlansSubmenu /></li>
 
             {menuItems.map((item: MenuItem) => (
               <li key={item.title}>
@@ -196,24 +157,12 @@ export default function Navbar() {
           {menuOpen && (
             <div className="md:hidden bg-white rounded-lg shadow-xl mt-2 p-4">
               <div className="space-y-2">
-                <div className="border-b pb-2">
-                  <AboutSubmenu />
-                </div>
-                <div className="border-b pb-2">
-                  <OfficersSubmenu />
-                </div>
-                <div className="border-b pb-2">
-                  <ServicesSubmenu />
-                </div>
-                <div className="border-b pb-2">
-                  <LawsSubmenu />
-                </div>
-                <div className="border-b pb-2">
-                  <FormsSubmenu />
-                </div>
-                <div className="border-b pb-2">
-                  <GallerySubmenu />
-                </div>
+                <div className="border-b pb-2"><AboutSubmenu /></div>
+                <div className="border-b pb-2"><OfficersSubmenu /></div>
+                <div className="border-b pb-2"><ServicesSubmenu /></div>
+                <div className="border-b pb-2"><LawsSubmenu /></div>
+                <div className="border-b pb-2"><FormsSubmenu /></div>
+                <div className="border-b pb-2"><GallerySubmenu /></div>
 
                 {menuItems.map((item: MenuItem) => (
                   <Link
