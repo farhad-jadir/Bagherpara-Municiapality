@@ -71,7 +71,7 @@ export default function AboutSubmenu() {
         className="relative group px-4 py-2 font-normal text-white
                    shadow-md hover:shadow-lg
                    transition-all duration-500 ease-in-out 
-                   overflow-hidden cursor-pointer"
+                   overflow-hidden cursor-pointer animate-pulse-color"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
