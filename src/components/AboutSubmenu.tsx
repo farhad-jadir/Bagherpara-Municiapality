@@ -28,7 +28,7 @@ export default function AboutSubmenu() {
              
              shadow-md hover:shadow-lg
              transition-all duration-500 ease-in-out 
-             overflow-hidden cursor-pointer"
+             overflow-hidden cursor-pointer animate-pulse-color"
   aria-expanded={isOpen}
   aria-haspopup="true"
 >

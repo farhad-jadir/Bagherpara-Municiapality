@@ -20,27 +20,26 @@ export default function GallerySubmenu() {
   return (
     <div className="relative">
       <button
-  onClick={() => setIsOpen(!isOpen)}
-  className="relative group px-5 py-2 font-bold text-indigo-700 
-             border-2 border-indigo-600 rounded-xl 
-             bg-gradient-to-r from-indigo-50 to-white
+       onClick={() => setIsOpen(!isOpen)}
+       className="relative group px-2 py-2 font-normal text-shadow-orange-400 
+             
              shadow-md hover:shadow-lg
              transition-all duration-500 ease-in-out 
-             overflow-hidden"
+             overflow-hidden cursor-pointer animate-pulse-color"
   aria-expanded={isOpen}
   aria-haspopup="true"
 >
   {/* 🔹 Default Text */}
-  <span className="flex items-center gap-2 relative z-10">
+  <span className="flex items-center relative z-10">
     📷 গ্যালারি
   </span>
 
   {/* 🔹 Hover Gradient Background */}
   <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 
-                   opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                   opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded"></span>
 
   {/* 🔹 Hover Text */}
-  <span className="absolute inset-0 flex items-center justify-center font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+  <span className="absolute inset-0 flex items-center justify-center font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
     📷 গ্যালারি
   </span>
 

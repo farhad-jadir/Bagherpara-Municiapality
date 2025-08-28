@@ -21,33 +21,32 @@ export default function LawsSubmenu() {
   return (
     <div className="relative">
       <button
-  onClick={() => setIsOpen(!isOpen)}
-  className="relative group px-5 py-2 font-bold text-purple-800 
-             border-2 border-purple-700 rounded-xl 
-             bg-gradient-to-r from-purple-50 to-white
+       onClick={() => setIsOpen(!isOpen)}
+       className="relative group px-2 py-2 font-normal text-white 
+             
              shadow-md hover:shadow-lg
              transition-all duration-500 ease-in-out 
-             overflow-hidden"
+             overflow-hidden cursor-pointer animate-pulse-color"
   aria-expanded={isOpen}
   aria-haspopup="true"
 >
   {/* 🔹 Default Text */}
-  <span className="flex items-center gap-2 relative z-10">
+  <span className="flex items-center relative z-10">
     ⚖️ আইন ও নীতিমালা
   </span>
 
   {/* 🔹 Hover Gradient Background */}
   <span className="absolute inset-0 bg-gradient-to-r from-purple-800 to-yellow-600 
-                   opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                   opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded"></span>
 
   {/* 🔹 Hover Text */}
-  <span className="absolute inset-0 flex items-center justify-center font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+  <span className="absolute inset-0 flex items-center justify-center font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
     ⚖️ আইন ও নীতিমালা
   </span>
 
   {/* 🔹 Bottom Border Animation */}
   <span className="absolute bottom-0 left-0 w-0 h-[3px] bg-yellow-400 group-hover:w-full transition-all duration-500"></span>
-</button>
+      </button>
 
       
       {isOpen && (

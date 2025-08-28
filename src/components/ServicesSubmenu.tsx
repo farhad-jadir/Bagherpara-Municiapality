@@ -44,32 +44,31 @@ export default function ServicesSubmenu() {
     <div className="relative">
       <button
   onClick={() => setIsOpen(!isOpen)}
-  className="relative group px-5 py-2 font-bold text-orange-700 
-             border-2 border-orange-600 rounded-xl 
-             bg-gradient-to-r from-orange-50 to-white
+  className="relative group px-5 py-2 font-normal text-white
+             
              shadow-md hover:shadow-lg
              transition-all duration-500 ease-in-out 
-             overflow-hidden"
+             overflow-hidden cursor-pointer animate-pulse-color"
   aria-expanded={isOpen}
   aria-haspopup="true"
 >
   {/* 🔹 Default Text */}
-  <span className="flex items-center gap-2 relative z-10">
+  <span className="flex items-center relative z-10">
     🛎️ সেবাসমূহ
   </span>
 
   {/* 🔹 Hover Gradient Background */}
   <span className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 
-                   opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                   opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded"></span>
 
   {/* 🔹 Hover Text */}
-  <span className="absolute inset-0 flex items-center justify-center font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+  <span className="absolute inset-0 flex items-center justify-center font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
     🛎️ সেবাসমূহ
   </span>
 
   {/* 🔹 Bottom Border Animation */}
   <span className="absolute bottom-0 left-0 w-0 h-[3px] bg-red-400 group-hover:w-full transition-all duration-500"></span>
-</button>
+      </button>
 
       
       {isOpen && (

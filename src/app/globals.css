@@ -25,3 +25,19 @@ body {
   color: var(--foreground);
   font-family: 'Noto Sans Bengali', sans-serif;
 }
+
+/* Combined color + opacity pulse animation */
+@keyframes pulse-color-opacity {
+  0%   { color: #FFFF00; opacity: 1; }   /* Red */
+  20%  { color: #f59e0b; opacity: 0.6; } /* Amber */
+  40%  { color: #FFFFFF; opacity: 1; }   /* Emerald */
+  60%  { color: #FFFFFF; opacity: 0.6; } /* Blue */
+  80%  { color: #FFFFFF; opacity: 1; }   /* Violet */
+  100% { color: #FFFF00; opacity: 1; }   /* Red */
+}
+
+.animate-pulse-color {
+  animation: pulse-color-opacity 1s infinite;
+  transition: color 0.3s;
+}
+
