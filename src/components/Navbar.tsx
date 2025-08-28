@@ -12,6 +12,7 @@ import FormsSubmenu from "./FormsSubmenu";
 import GallerySubmenu from "./GallerySubmenu";
 import ContactSubmenu from "./ContactSubmenu";
 import FaqSubmenu from "./FaqSubmenu";
+import PlansSubmenu from "./PlansSubmenu";
 import { Search, Globe, Menu, X } from "lucide-react";
 
 interface MenuItem {
@@ -28,7 +29,7 @@ export default function Navbar() {
   const router = useRouter();
 
   const menuItems: MenuItem[] = [
-    { title: "পরিকল্পনা", href: "/plans" },
+    
   ];
 
   useEffect(() => {
@@ -171,6 +172,9 @@ export default function Navbar() {
             </li>
             <li>
               <FaqSubmenu />
+            </li>
+            <li>
+              <PlansSubmenu />
             </li>
 
             {menuItems.map((item: MenuItem) => (
