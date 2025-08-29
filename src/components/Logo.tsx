@@ -64,12 +64,20 @@ export default function MainHeader() {
           {/* ২-৫: ঘড়ি, তারিখ, দিন, অফিস স্ট্যাটাস */}
           <div className="hidden md:flex flex-col items-center md:col-span-1">
             <span className="text-sm text-gray-500">সময়</span>
-            <span className="font-mono text-lg font-semibold">{now.toLocaleTimeString("bn-BD")}</span>
+            <span className="font-mono text-lg font-semibold">
+              {now.toLocaleTimeString("bn-BD")}
+            </span>
           </div>
 
           <div className="hidden md:flex flex-col items-center md:col-span-1">
             <span className="text-sm text-gray-500">তারিখ</span>
-            <span className="font-semibold">{now.toLocaleDateString("bn-BD", { year: "numeric", month: "long", day: "numeric" })}</span>
+            <span className="font-semibold">
+              {now.toLocaleDateString("bn-BD", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
           </div>
 
           <div className="hidden md:flex flex-col items-center md:col-span-1">
@@ -85,15 +93,14 @@ export default function MainHeader() {
           {/* ৬ষ্ঠ: লোগো */}
           <div className="flex items-center justify-end md:col-span-1">
             <div className="h-16 w-16 relative">
-              <Image src="/images/logo.png" alt="Municipality Logo" fill sizes="(max-width: 768px) 64px, 64px" className="object-contain" />
+              <Image
+                src="/images/logo.png"
+                alt="Municipality Logo"
+                fill
+                sizes="(max-width: 768px) 64px, 64px"
+                className="object-contain"
+              />
             </div>
-
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="ml-3 md:hidden p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
-            >
-              {menuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
           </div>
         </div>
 
@@ -101,11 +108,19 @@ export default function MainHeader() {
         <div className="md:hidden mt-3 grid grid-cols-2 gap-2">
           <div className="p-2 border rounded text-center">
             <div className="text-xs text-gray-500">সময়</div>
-            <div className="font-mono font-semibold">{now.toLocaleTimeString("bn-BD")}</div>
+            <div className="font-mono font-semibold">
+              {now.toLocaleTimeString("bn-BD")}
+            </div>
           </div>
           <div className="p-2 border rounded text-center">
             <div className="text-xs text-gray-500">তারিখ</div>
-            <div className="font-semibold">{now.toLocaleDateString("bn-BD", { year: "numeric", month: "short", day: "numeric" })}</div>
+            <div className="font-semibold">
+              {now.toLocaleDateString("bn-BD", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </div>
           </div>
           <div className="p-2 border rounded text-center">
             <div className="text-xs text-gray-500">দিন</div>
@@ -113,7 +128,9 @@ export default function MainHeader() {
           </div>
           <div className="p-2 border rounded text-center">
             <div className="text-xs text-gray-500">অফিস</div>
-            <div className="font-semibold text-purple-700">{officeStatus}</div>
+            <div className="font-semibold text-purple-700">
+              {officeStatus}
+            </div>
           </div>
         </div>
       </div>

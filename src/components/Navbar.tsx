@@ -60,19 +60,39 @@ export default function Navbar() {
         scrolled ? "bg-white shadow-lg" : "bg-transparent"
       }`}
     >
-      {/* 🔹 Top Header with Search */}
+      {/* 🔹 Top Header */}
       <div className="bg-gradient-to-r from-purple-800 to-purple-600 text-white">
         <div className="container mx-auto px-4 py-3">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* বাংলাদেশ জাতীয় তথ্য বাতায়ন */}
+          {/* 🔹 মোবাইল ভিউ */}
+          <div className="flex items-center justify-between md:hidden">
+            {/* বাম পাশে: বাংলাদেশ জাতীয় তথ্য বাতায়ন */}
             <div className="flex items-center">
               <div className="w-3 h-3 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-              <span className="font-normal text-sm md:text-base animate-pulse">
+              <span className="font-normal text-sm animate-pulse">
                 বাংলাদেশ জাতীয় তথ্য বাতায়ন
               </span>
             </div>
 
-            {/* Search Section */}
+            {/* ডান পাশে: হ্যামবার্গার */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="p-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors"
+            >
+              {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+
+          {/* 🔹 ডেস্কটপ ভিউ */}
+          <div className="hidden md:flex flex-col md:flex-row items-center justify-between gap-4">
+            {/* বাম পাশে: বাংলাদেশ জাতীয় তথ্য বাতায়ন */}
+            <div className="flex items-center">
+              <div className="w-3 h-3 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+              <span className="font-normal text-base animate-pulse">
+                বাংলাদেশ জাতীয় তথ্য বাতায়ন
+              </span>
+            </div>
+
+            {/* Search + Language */}
             <div className="flex flex-col md:flex-row items-center gap-3 w-full md:w-auto">
               <div className="flex items-center bg-white rounded-lg overflow-hidden w-full md:w-auto">
                 {/* Category Select */}
@@ -120,8 +140,8 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* 🔹 Main Header with 6 parts */}
-      <Logo/>
+      {/* 🔹 Main Header with Logo */}
+      <Logo />
 
       {/* 🔹 Main Navigation */}
       <div className="bg-gradient-to-r from-purple-700 to-purple-800 shadow-lg">
@@ -157,12 +177,15 @@ export default function Navbar() {
           {menuOpen && (
             <div className="md:hidden bg-white rounded-lg shadow-xl mt-2 p-4">
               <div className="space-y-2">
-                <div className="border-b pb-2"><AboutSubmenu /></div>
-                <div className="border-b pb-2"><OfficersSubmenu /></div>
-                <div className="border-b pb-2"><ServicesSubmenu /></div>
-                <div className="border-b pb-2"><LawsSubmenu /></div>
-                <div className="border-b pb-2"><FormsSubmenu /></div>
-                <div className="border-b pb-2"><GallerySubmenu /></div>
+                <div className="bg-black border-b pb-2"><AboutSubmenu /></div>
+                <div className="bg-black border-b pb-2"><OfficersSubmenu /></div>
+                <div className="bg-black border-b pb-2"><ServicesSubmenu /></div>
+                <div className="bg-black border-b pb-2"><LawsSubmenu /></div>
+                <div className="bg-black border-b pb-2"><FormsSubmenu /></div>
+                <div className="bg-black border-b pb-2"><GallerySubmenu /></div>
+                <div className="bg-black border-b pb-2"><ContactSubmenu /></div>
+                <div className="bg-black border-b pb-2"><FaqSubmenu/></div>
+                <div className="bg-black border-b pb-2"><PlansSubmenu /></div>
 
                 {menuItems.map((item: MenuItem) => (
                   <Link
