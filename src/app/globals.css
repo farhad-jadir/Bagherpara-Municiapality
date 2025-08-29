@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap');
 @import "tailwindcss";
 
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -40,4 +41,26 @@ body {
   animation: pulse-color-opacity 1s infinite;
   transition: color 0.3s;
 }
+
+/* globals.css */
+
+/* লাইভ গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড */
+.bg-live-gradient {
+  background: linear-gradient(-45deg, #7f5af0, #2cb67d, #ff8906, #d9376e);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
