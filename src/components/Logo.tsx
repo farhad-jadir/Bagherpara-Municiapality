@@ -123,15 +123,15 @@ export default function MainHeader() {
 
         {/* মোবাইল ভিউ */}
         <div className="md:hidden mt-3 grid grid-cols-2 gap-2">
-          <div className="p-2 border rounded text-center">
-            <div className="text-xs text-gray-500">সময়</div>
-            <div className="font-mono font-semibold">
+          <div className="p-2 border border-white rounded text-center">
+            <div className="text-xs text-white">সময়</div>
+            <div className="font-mono font-semibold text-white">
               {now.toLocaleTimeString("bn-BD")}
             </div>
           </div>
-          <div className="p-2 border rounded text-center">
-            <div className="text-xs text-gray-500">তারিখ</div>
-            <div className="font-semibold">
+          <div className="p-2 border border-white rounded text-center">
+            <div className="text-xs text-white">তারিখ</div>
+            <div className="font-semibold text-white">
               {now.toLocaleDateString("bn-BD", {
                 year: "numeric",
                 month: "short",
@@ -139,13 +139,13 @@ export default function MainHeader() {
               })}
             </div>
           </div>
-          <div className="p-2 border rounded text-center">
-            <div className="text-xs text-gray-500">দিন</div>
-            <div className="font-semibold">{todayName}</div>
+          <div className="p-2 border border-white rounded text-center">
+            <div className="text-xs text-white">দিন</div>
+            <div className="font-semibold text-white">{todayName}</div>
           </div>
-          <div className="p-2 border rounded text-center">
-            <div className="text-xs text-gray-500">অফিস</div>
-            <div className="font-semibold text-purple-700">{officeStatus}</div>
+          <div className="p-2 border border-white rounded text-center">
+            <div className="text-xs text-white">অফিস</div>
+            <div className="font-semibold text-white">{officeStatus}</div>
           </div>
         </div>
       </div>
