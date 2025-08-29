@@ -46,7 +46,7 @@ body {
 
 /* লাইভ গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড */
 .bg-live-gradient {
-  background: linear-gradient(-45deg, #7f5af0, #2cb67d, #ff8906, #d9376e);
+  background: linear-gradient(-45deg, #051b34, #450101, #041f0f, #0e0108, #2b1122);
   background-size: 400% 400%;
   animation: gradientMove 12s ease infinite;
 }

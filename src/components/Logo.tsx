@@ -28,7 +28,7 @@ export default function MainHeader() {
   if (holidays[todayKey]) {
     officeStatus = `🚫 আজ সরকারি ছুটি (${holidays[todayKey]})`;
   } else if (now.getDay() === 5 || now.getDay() === 6) {
-    officeStatus = "🚫 আজ অফিস বন্ধ (সাপ্তাহিক ছুটি)";
+    officeStatus = "🚫 আজ অফিস বন্ধ ";
   } else {
     officeStatus = "✅ আজ অফিস খোলা";
   }
@@ -53,7 +53,7 @@ export default function MainHeader() {
   return (
     <header className="bg-live-gradient border-b">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-center py-4">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-2 items-center py-4">
           {/* লোগো */}
           <div className="flex items-center md:col-span-1">
             <Link href="/" className="flex items-center group">
@@ -64,7 +64,7 @@ export default function MainHeader() {
                 <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
               </div>
               <div className="ml-4">
-                <h1 className="text-base font-bold text-gray-800 group-hover:text-purple-700 transition-colors">
+                <h1 className="text-base font-bold text-white group-hover:text-purple-700 transition-colors">
                   Bagharapara Municipality
                 </h1>
               </div>
@@ -73,16 +73,16 @@ export default function MainHeader() {
 
           {/* সময় */}
           <div className="hidden md:flex flex-col items-center md:col-span-1">
-            <span className="text-sm text-gray-500">সময়</span>
-            <span className="font-mono text-lg font-semibold">
+            <span className="text-sm text-white">সময়</span>
+            <span className="font-mono text-lg text-white font-semibold">
               {now.toLocaleTimeString("bn-BD")}
             </span>
           </div>
 
           {/* তারিখ */}
           <div className="hidden md:flex flex-col items-center md:col-span-1">
-            <span className="text-sm text-gray-500">তারিখ</span>
-            <span className="font-semibold">
+            <span className="text-sm text-white">তারিখ</span>
+            <span className="font-semibold text-white">
               {now.toLocaleDateString("bn-BD", {
                 year: "numeric",
                 month: "long",
@@ -93,14 +93,14 @@ export default function MainHeader() {
 
           {/* দিন */}
           <div className="hidden md:flex flex-col items-center md:col-span-1">
-            <span className="text-sm text-gray-500">দিন</span>
-            <span className="font-semibold">{todayName}</span>
+            <span className="text-sm text-white">দিন</span>
+            <span className="font-semibold text-white">{todayName}</span>
           </div>
 
           {/* অফিস */}
           <div className="hidden md:flex flex-col items-center md:col-span-1">
-            <span className="text-sm text-gray-500">অফিস</span>
-            <span className="font-semibold text-purple-700">{officeStatus}</span>
+            <span className="text-sm text-white">অফিস</span>
+            <span className="font-semibold text-white">{officeStatus}</span>
           </div>
 
           {/* ক্যারোজেল */}
