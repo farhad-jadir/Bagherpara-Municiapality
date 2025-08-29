@@ -28,7 +28,7 @@ export default function MainHeader() {
   if (holidays[todayKey]) {
     officeStatus = `🚫 আজ সরকারি ছুটি (${holidays[todayKey]})`;
   } else if (now.getDay() === 5 || now.getDay() === 6) {
-    officeStatus = "🚫 আজ অফিস বন্ধ ";
+    officeStatus = "🚫 আজ অফিস বন্ধ";
   } else {
     officeStatus = "✅ আজ অফিস খোলা";
   }
@@ -37,115 +37,129 @@ export default function MainHeader() {
 
   // ক্যারোজেল ছবির লিস্ট
   const images = [
-    "/images/muni.png",
-    "/images/UNO.png",
-    "/images/ac.png",
+    { src: "/images/muni.png", title: "বাঘারপাড়া পৌরসভা" },
+    { src: "/images/UNO.png", title: "শোভন সরকার, ইউএনও" },
+    { src: "/images/ac.png", title: "মাহির দেওয়ান, ভূমি কমিশনার" },
   ];
 
   // Auto Slide
   useEffect(() => {
-    const slideTimer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % images.length);
-    }, 4000);
+    const slideTimer = setInterval(
+      () => setCurrentSlide((prev) => (prev + 1) % images.length),
+      4000
+    );
     return () => clearInterval(slideTimer);
   }, [images.length]);
 
   return (
     <header className="bg-live-gradient border-b">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-2 items-center py-4">
+        {/* ডেস্কটপ + বড় স্ক্রিন */}
+        <div className="hidden md:flex md:items-center md:justify-between py-4 gap-4">
           {/* লোগো */}
-          <div className="flex items-center md:col-span-1">
-            <Link href="/" className="flex items-center group">
-              <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                  <span className="text-white font-bold text-lg">বাপ</span>
-                </div>
-                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
+          <Link href="/" className="flex items-center flex-shrink-0 group">
+            <div className="relative">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                <span className="text-white font-bold text-lg">বাপ</span>
               </div>
-              <div className="ml-4">
-                <h1 className="text-base font-bold text-white group-hover:text-purple-700 transition-colors">
-                  Bagharapara Municipality
-                </h1>
-              </div>
-            </Link>
-          </div>
+              <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
+            </div>
+            <div className="ml-4">
+              <h1 className="text-base font-bold text-white group-hover:text-purple-700 transition-colors">
+                বাঘারপাড়া পৌরসভা
+              </h1>
+            </div>
+          </Link>
 
-          {/* সময় */}
-          <div className="hidden md:flex flex-col items-center md:col-span-1">
-            <span className="text-sm text-white">সময়</span>
-            <span className="font-mono text-lg text-white font-semibold">
-              {now.toLocaleTimeString("bn-BD")}
-            </span>
-          </div>
-
-          {/* তারিখ */}
-          <div className="hidden md:flex flex-col items-center md:col-span-1">
-            <span className="text-sm text-white">তারিখ</span>
-            <span className="font-semibold text-white">
-              {now.toLocaleDateString("bn-BD", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </span>
-          </div>
-
-          {/* দিন */}
-          <div className="hidden md:flex flex-col items-center md:col-span-1">
-            <span className="text-sm text-white">দিন</span>
-            <span className="font-semibold text-white">{todayName}</span>
-          </div>
-
-          {/* অফিস */}
-          <div className="hidden md:flex flex-col items-center md:col-span-1">
-            <span className="text-sm text-white">অফিস</span>
-            <span className="font-semibold text-white">{officeStatus}</span>
+          {/* সময় / তারিখ / দিন / অফিস */}
+          <div className="flex flex-1 justify-around items-center text-white">
+            <div className="flex flex-col items-center">
+              <span className="text-sm">সময়</span>
+              <span className="font-mono font-semibold text-lg">{now.toLocaleTimeString("bn-BD")}</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-sm">তারিখ</span>
+              <span className="font-semibold text-lg">
+                {now.toLocaleDateString("bn-BD", { year: "numeric", month: "long", day: "numeric" })}
+              </span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-sm">দিন</span>
+              <span className="font-semibold text-lg">{todayName}</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-sm">অফিস</span>
+              <span className="font-semibold text-lg">{officeStatus}</span>
+            </div>
           </div>
 
           {/* ক্যারোজেল */}
-          <div className="flex items-center justify-start md:justify-end md:col-span-1 bg-live-gradient rounded ">
-            <div className="relative w-full md:w-64 h-40 md:h-32 overflow-hidden rounded-lg shadow-lg ">
-              {images.map((img, index) => (
-                <Image
-                  key={index}
-                  src={img}
-                  alt={`Slide ${index + 1}`}
-                  fill
-                  className={`object-contain absolute transition-opacity duration-700 ${
-                    index === currentSlide ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-              ))}
-            </div>
+          <div className="relative w-64 h-36 flex-shrink-0 overflow-hidden rounded-lg shadow-lg">
+            {images.map((item, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-700 ${
+                  index === currentSlide ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <Image src={item.src} alt={item.title} fill className="object-contain" />
+                <div className="absolute bottom-1 bg-black/50 text-white text-xs px-2 py-1 rounded">
+                  {item.title}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* মোবাইল ভিউ */}
-        <div className="md:hidden mt-3 grid grid-cols-2 gap-2">
-          <div className="p-2 border border-white rounded text-center">
-            <div className="text-xs text-white">সময়</div>
-            <div className="font-mono font-semibold text-white">
-              {now.toLocaleTimeString("bn-BD")}
+        {/* মোবাইল + ট্যাব */}
+        <div className="md:hidden ">
+          {/* Mobile Logo */}
+          <Link href="/" className="flex items-center mb-3 justify-center">
+            <div className="relative">
+              <div className="w-12 h-12 mt-2 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-lg ">বাপ</span>
+              </div>
+              <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white"></div>
+            </div>
+            <div className="ml-3">
+              <h1 className="text-base font-bold text-white mt-2">বাঘারপাড়া পৌরসভা</h1>
+            </div>
+          </Link>
+
+          <div className="grid grid-cols-2 gap-2">
+            <div className="p-2 border border-white rounded text-center">
+              <div className="text-xs text-white">সময়</div>
+              <div className="font-mono font-semibold text-white text-sm">{now.toLocaleTimeString("bn-BD")}</div>
+            </div>
+            <div className="p-2 border border-white rounded text-center">
+              <div className="text-xs text-white">তারিখ</div>
+              <div className="font-semibold text-white text-sm">{now.toLocaleDateString("bn-BD", { year: "numeric", month: "short", day: "numeric" })}</div>
+            </div>
+            <div className="p-2 border border-white rounded text-center">
+              <div className="text-xs text-white">দিন</div>
+              <div className="font-semibold text-white text-sm">{todayName}</div>
+            </div>
+            <div className="p-2 border border-white rounded text-center">
+              <div className="text-xs text-white">অফিস</div>
+              <div className="font-semibold text-white text-sm">{officeStatus}</div>
             </div>
           </div>
-          <div className="p-2 border border-white rounded text-center">
-            <div className="text-xs text-white">তারিখ</div>
-            <div className="font-semibold text-white">
-              {now.toLocaleDateString("bn-BD", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
-            </div>
-          </div>
-          <div className="p-2 border border-white rounded text-center">
-            <div className="text-xs text-white">দিন</div>
-            <div className="font-semibold text-white">{todayName}</div>
-          </div>
-          <div className="p-2 border border-white rounded text-center">
-            <div className="text-xs text-white">অফিস</div>
-            <div className="font-semibold text-white">{officeStatus}</div>
+
+          {/* Mobile ক্যারোজেল */}
+          <div className="relative w-full h-36 mt-3 overflow-hidden rounded-lg shadow-lg">
+            {images.map((item, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-700 ${
+                  index === currentSlide ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <Image src={item.src} alt={item.title} fill className="object-contain" />
+                <div className="absolute bottom-1 bg-black/50 text-white text-xs px-2 py-1 rounded">
+                  {item.title}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

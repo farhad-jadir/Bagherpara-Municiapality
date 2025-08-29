@@ -76,7 +76,7 @@ export default function AboutSubmenu() {
         aria-haspopup="true"
       >
         {/* 🔹 Default Text */}
-        <span className="flex items-center relative z-10">
+        <span className="flex items-center  relative z-10">
           📖 আমাদের সম্পর্কে
         </span>
 
