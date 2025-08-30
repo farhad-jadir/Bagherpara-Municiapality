@@ -1,5 +1,6 @@
 import HeroSection from "../components/Hero";
 import Heading from "@/components/Heading";
+import Complain from "@/components/Complain";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
 
         {/* ✅ Hero Section যুক্ত করা হলো */}
         <HeroSection  />
+        <Complain  />
       </main>
     </>
   );
