@@ -61,6 +61,25 @@ body {
   100% {
     background-position: 0% 50%;
   }
+} 
+
+/* লাইভ গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড */
+.bg-live-gradienttow {
+  background: linear-gradient(-45deg, #450101, #7b9602, #530e3d, #0e0108, #a4e40c);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 

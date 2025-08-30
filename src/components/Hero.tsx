@@ -20,8 +20,8 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative bg-gradient-to-r from-green-600 to-green-800 text-white py-12">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    <section className="relative bg-live-gradienttow text-white py-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* Left side: Title + Description */}
         <div>
           <h1 className="text-4xl md:text-5xl font-bold leading-snug mb-4">
