@@ -190,7 +190,7 @@ export default function Complain() {
 
       {/* আপনার পরিচয় তথ্য সেকশন - ডাইনামিকভাবে show/hide হবে */}
       {showIdentityForm && (
-        <div className="bg-gray-50 p-6 border-t">
+        <div className="bg-gray-50 p-6 mt-4 rounded-xl border-t">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-800">
               আপনার পরিচয় তথ্য *
