@@ -1,29 +1,28 @@
-// app/admin/login/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Lock, User } from "lucide-react";
 
-export default function AdminLogin() {
+function AdminLoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectPath = searchParams.get('from') || '/admin';
+  const redirectPath = searchParams.get("from") || "/admin";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simple authentication - production এ API call করুন
-    if (username === process.env.NEXT_PUBLIC_ADMIN_USERNAME && 
-        password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
-      
+    // Simple authentication (production এ অবশ্যই backend API ব্যবহার করবে)
+    if (
+      username === process.env.NEXT_PUBLIC_ADMIN_USERNAME &&
+      password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD
+    ) {
       // Set authentication cookie
       document.cookie = `admin-token=${process.env.NEXT_PUBLIC_ADMIN_SECRET_TOKEN}; path=/; max-age=86400`; // 24 hours
-      
       router.push(redirectPath);
     } else {
       alert("Invalid credentials");
@@ -45,11 +44,14 @@ export default function AdminLogin() {
             বাঘারপাড়া পৌরসভা এডমিন প্যানেল
           </p>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div className="space-y-4">
             <div className="relative">
-              <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <User
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                size={20}
+              />
               <input
                 type="text"
                 required
@@ -60,9 +62,12 @@ export default function AdminLogin() {
                 disabled={isLoading}
               />
             </div>
-            
+
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Lock
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                size={20}
+              />
               <input
                 type="password"
                 required
@@ -81,11 +86,19 @@ export default function AdminLogin() {
               disabled={isLoading}
               className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'লগইন হচ্ছে...' : 'লগইন'}
+              {isLoading ? "লগইন হচ্ছে..." : "লগইন"}
             </button>
           </div>
         </form>
       </div>
     </div>
+  );
+}
+
+export default function AdminLogin() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AdminLoginForm />
+    </Suspense>
   );
 }
