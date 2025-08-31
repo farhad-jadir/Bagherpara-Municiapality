@@ -42,7 +42,7 @@ export default function LawsSubmenu() {
         className="relative group px-4 py-2 font-normal text-white
                    shadow-md hover:shadow-lg
                    transition-all duration-500 ease-in-out 
-                   overflow-hidden cursor-pointer animate-pulse-color"
+                   overflow-hidden cursor-pointer "
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
