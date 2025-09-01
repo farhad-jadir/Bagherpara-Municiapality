@@ -50,7 +50,6 @@ export default function PublicHearingWithMap() {
   // Google Maps API key from .env
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   const googleMapsLink = `https://www.google.com/maps?q=${municipalCoordinates.lat},${municipalCoordinates.lng}`;
-  const staticMapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${municipalCoordinates.lat},${municipalCoordinates.lng}&zoom=15&size=600x400&markers=color:red%7C${municipalCoordinates.lat},${municipalCoordinates.lng}&key=${apiKey}`;
 
   const [session] = useState<HearingSession>({
     id: 1,
@@ -256,7 +255,7 @@ export default function PublicHearingWithMap() {
           </div>
         </div>
 
-        {/* ডান পাশ - ম্যাপ */}
+        {/* ডান পাশ - ইন্টারঅ্যাকটিভ ম্যাপ */}
         <div className="bg-gradient-to-br from-green-50 to-teal-50 rounded-xl p-6 shadow-lg border border-green-200">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-3 bg-green-100 rounded-full">
@@ -270,10 +269,13 @@ export default function PublicHearingWithMap() {
 
           <div className="bg-white rounded-lg overflow-hidden shadow-md mb-4">
             <div className="h-64 bg-gray-200 relative">
-              <img 
-                src={staticMapUrl} 
-                alt="বাঘারপাড়া পৌরসভার মানচিত্র" 
-                className="w-full h-full object-cover"
+              <iframe
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${municipalCoordinates.lat},${municipalCoordinates.lng}`}
               />
             </div>
             
@@ -332,5 +334,5 @@ export default function PublicHearingWithMap() {
         </div>
       </div>
     </div>
-  );
+  ); 
 }
