@@ -1,9 +1,8 @@
-// app/about/history/page.tsx
-export default function History() {
+export default function OfficeOrdersPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">Office Orders</h1>
-      {/* আপনার কন্টেন্ট এখানে যোগ করুন */}
+    <div className="p-6">
+      <h1 className="text-2xl font-bold text-center">অফিস আদেশ</h1>
+      <p className="text-center">এখানে অফিস আদেশ দেখানো হবে।</p>
     </div>
   );
 }
