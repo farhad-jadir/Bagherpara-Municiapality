@@ -43,8 +43,8 @@ export default function PublicHearingWithMap() {
 
   // বাঘারপাড়া পৌরসভার স্থানাঙ্ক
   const municipalCoordinates = {
-    lat: 23.768906,
-    lng: 89.964927
+    lat: 23.22024722611398, 
+    lng: 89.34913694563538
   };
 
   // Google Maps API key from .env

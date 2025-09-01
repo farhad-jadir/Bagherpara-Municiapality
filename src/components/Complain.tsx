@@ -96,7 +96,7 @@ export default function Complain() {
   };
 
   return (
-    <div className="bg-live-gradient px-4 sm:px-8 md:px-12 py-8 bg-white rounded-xl shadow-2xl overflow-hidden">
+    <div className="bg-live-gradienttow px-4 sm:px-8 md:px-12 py-8 bg-white rounded-xl shadow-2xl overflow-hidden">
       {/* হেডার */}
       <div className=".bg-live-gradienttow rounded from-purple-600 to-blue-600 py-6 text-center">
         <h1 className="text-2xl font-bold text-white">অভিযোগ ও মন্তব্য ব্যবস্থাপনা</h1>
