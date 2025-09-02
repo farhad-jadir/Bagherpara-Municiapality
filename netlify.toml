@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_PUBLIC_GOOGLE_MAPS_API_KEY = "AIzaSyAZK3P9mRy-QYXrDSEZ0xdp85grSp_DOyE"
