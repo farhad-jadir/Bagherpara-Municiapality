@@ -14,7 +14,9 @@ import {
   MapPin,
   Navigation,
   Phone,
-  Mail
+  Mail,
+  AlertCircle,
+  Map
 } from "lucide-react";
 
 interface HearingSession {
@@ -40,6 +42,7 @@ export default function PublicHearingWithMap() {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState<PublicComment[]>([]);
   const [userName, setUserName] = useState("");
+  const [mapError, setMapError] = useState("");
 
   // বাঘারপাড়া পৌরসভার স্থানাঙ্ক
   const municipalCoordinates = {
@@ -107,6 +110,10 @@ export default function PublicHearingWithMap() {
 
   const openGoogleMaps = () => {
     window.open(googleMapsLink, "_blank");
+  };
+
+  const handleMapError = () => {
+    setMapError("ম্যাপ লোড করতে সমস্যা হচ্ছে। দয়া করে গুগল ম্যাপ বাটনে ক্লিক করুন অথবা API Key এর রেস্ট্রিকশন চেক করুন।");
   };
 
   return (
@@ -269,14 +276,30 @@ export default function PublicHearingWithMap() {
 
           <div className="bg-white rounded-lg overflow-hidden shadow-md mb-4">
             <div className="h-64 bg-gray-200 relative">
-              <iframe
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${municipalCoordinates.lat},${municipalCoordinates.lng}`}
-              />
+              {mapError ? (
+                <div className="h-full flex flex-col items-center justify-center bg-gray-100 text-gray-500 p-4">
+                  <AlertCircle size={32} className="mb-2 text-red-500" />
+                  <p className="text-center text-sm mb-2">{mapError}</p>
+                  <button
+                    onClick={openGoogleMaps}
+                    className="bg-green-600 text-white px-3 py-1 rounded text-xs flex items-center gap-1"
+                  >
+                    <Map size={12} />
+                    গুগল ম্যাপে দেখুন
+                  </button>
+                </div>
+              ) : (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=Bagherpara+Municipality,Jashore,Bangladesh&center=${municipalCoordinates.lat},${municipalCoordinates.lng}&zoom=15`}
+                  onError={handleMapError}
+                />
+              )}
             </div>
             
             <div className="p-4">
