@@ -59,8 +59,8 @@ export default function MainHeader() {
           {/* লোগো */}
           <Link href="/" className="flex items-center flex-shrink-0 group">
             <div className="relative">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                <span className="text-white font-bold text-lg">বাপ</span>
+              <div className="w-16 h-16 bg-white ml-6 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                <img src="/images/logo2.png" alt="Logo" className="w-16 h-16  object-contain" />
               </div>
               <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
             </div>

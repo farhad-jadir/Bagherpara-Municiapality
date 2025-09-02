@@ -31,11 +31,11 @@ export default function Hero() {
             নাগরিক সেবা, আইন-নীতিমালা, পরিকল্পনা ও যোগাযোগ সম্পর্কিত সকল তথ্য এখানে পাওয়া যাবে।
           </p>
           <Link
-            href="/"
-            className="inline-block bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-yellow-300 transition"
-          >
-            আরও জানুন →
+              href="/nagoric"
+              className="inline-block bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-yellow-300 transition">
+              আপনার নাগরিক তথ্য দিন
           </Link>
+
         </div>
 
         {/* Right side: Office Orders */}
