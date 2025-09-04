@@ -144,7 +144,10 @@ export default function Heading({
             ref={trackRef}
             className="pl-20 sm:pl-28 md:pl-36"
             style={{
-              animation: `headline-scroll ${duration}s linear infinite`,
+              animationName: "headline-scroll",
+              animationDuration: `${duration}s`,
+              animationTimingFunction: "linear",
+              animationIterationCount: "infinite",
               animationPlayState: paused ? "paused" : "running",
               willChange: "transform",
               whiteSpace: "nowrap",

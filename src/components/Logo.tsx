@@ -5,14 +5,23 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function MainHeader() {
-  const [now, setNow] = useState(new Date());
+  const [now, setNow] = useState<Date | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  // ক্লায়েন্ট মাউন্ট হওয়ার পর চিহ্নিত করা
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // ঘড়ি আপডেট
   useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000);
+    if (!isMounted) return;
+    const update = () => setNow(new Date());
+    update();
+    const t = setInterval(update, 1000);
     return () => clearInterval(t);
-  }, []);
+  }, [isMounted]);
 
   // সরকারি ছুটি তালিকা
   const holidays: { [key: string]: string } = {
@@ -23,9 +32,11 @@ export default function MainHeader() {
     "2025-12-16": "বিজয় দিবস",
   };
 
-  const todayKey = now.toISOString().split("T")[0];
-  let officeStatus: string;
-  if (holidays[todayKey]) {
+  const todayKey = now ? now.toISOString().split("T")[0] : "";
+  let officeStatus: string = "";
+  if (!now) {
+    officeStatus = "";
+  } else if (holidays[todayKey]) {
     officeStatus = `🚫 আজ সরকারি ছুটি (${holidays[todayKey]})`;
   } else if (now.getDay() === 5 || now.getDay() === 6) {
     officeStatus = "🚫 আজ অফিস বন্ধ";
@@ -33,7 +44,9 @@ export default function MainHeader() {
     officeStatus = "✅ আজ অফিস খোলা";
   }
 
-  const todayName = now.toLocaleDateString("bn-BD", { weekday: "long" });
+  const todayName = now
+    ? now.toLocaleDateString("bn-BD", { weekday: "long" })
+    : "";
 
   // ক্যারোজেল ছবির লিস্ট
   const images = [
@@ -60,7 +73,11 @@ export default function MainHeader() {
           <Link href="/" className="flex items-center flex-shrink-0 group">
             <div className="relative">
               <div className="w-16 h-16 bg-white ml-6 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                <img src="/images/logo2.png" alt="Logo" className="w-16 h-16  object-contain" />
+                <img
+                  src="/images/logo2.png"
+                  alt="Logo"
+                  className="w-16 h-16  object-contain"
+                />
               </div>
               <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
             </div>
@@ -75,21 +92,33 @@ export default function MainHeader() {
           <div className="flex flex-1 justify-around items-center text-white">
             <div className="flex flex-col items-center">
               <span className="text-sm">সময়</span>
-              <span className="font-mono font-semibold text-lg">{now.toLocaleTimeString("bn-BD")}</span>
+              <span className="font-mono font-semibold text-lg">
+                {isMounted && now ? now.toLocaleTimeString("bn-BD") : ""}
+              </span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-sm">তারিখ</span>
               <span className="font-semibold text-lg">
-                {now.toLocaleDateString("bn-BD", { year: "numeric", month: "long", day: "numeric" })}
+                {isMounted && now
+                  ? now.toLocaleDateString("bn-BD", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : ""}
               </span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-sm">দিন</span>
-              <span className="font-semibold text-lg">{todayName}</span>
+              <span className="font-semibold text-lg">
+                {isMounted && todayName ? todayName : ""}
+              </span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-sm">অফিস</span>
-              <span className="font-semibold text-lg">{officeStatus}</span>
+              <span className="font-semibold text-lg">
+                {isMounted ? officeStatus : ""}
+              </span>
             </div>
           </div>
 
@@ -102,7 +131,12 @@ export default function MainHeader() {
                   index === currentSlide ? "opacity-100" : "opacity-0"
                 }`}
               >
-                <Image src={item.src} alt={item.title} fill className="object-contain" />
+                <Image
+                  src={item.src}
+                  alt={item.title}
+                  fill
+                  className="object-contain"
+                />
                 <div className="absolute bottom-1 bg-black/50 text-white text-xs px-2 py-1 rounded">
                   {item.title}
                 </div>
@@ -122,26 +156,42 @@ export default function MainHeader() {
               <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white"></div>
             </div>
             <div className="ml-3">
-              <h1 className="text-base font-bold text-white mt-2">বাঘারপাড়া পৌরসভা</h1>
+              <h1 className="text-base font-bold text-white mt-2">
+                বাঘারপাড়া পৌরসভা
+              </h1>
             </div>
           </Link>
 
           <div className="grid grid-cols-2 gap-2">
             <div className="p-2 border border-white rounded text-center">
               <div className="text-xs text-white">সময়</div>
-              <div className="font-mono font-semibold text-white text-sm">{now.toLocaleTimeString("bn-BD")}</div>
+              <div className="font-mono font-semibold text-white text-sm">
+                {isMounted && now ? now.toLocaleTimeString("bn-BD") : ""}
+              </div>
             </div>
             <div className="p-2 border border-white rounded text-center">
               <div className="text-xs text-white">তারিখ</div>
-              <div className="font-semibold text-white text-sm">{now.toLocaleDateString("bn-BD", { year: "numeric", month: "short", day: "numeric" })}</div>
+              <div className="font-semibold text-white text-sm">
+                {isMounted && now
+                  ? now.toLocaleDateString("bn-BD", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })
+                  : ""}
+              </div>
             </div>
             <div className="p-2 border border-white rounded text-center">
               <div className="text-xs text-white">দিন</div>
-              <div className="font-semibold text-white text-sm">{todayName}</div>
+              <div className="font-semibold text-white text-sm">
+                {isMounted && todayName ? todayName : ""}
+              </div>
             </div>
             <div className="p-2 border border-white rounded text-center">
               <div className="text-xs text-white">অফিস</div>
-              <div className="font-semibold text-white text-sm">{officeStatus}</div>
+              <div className="font-semibold text-white text-sm">
+                {isMounted ? officeStatus : ""}
+              </div>
             </div>
           </div>
 
@@ -154,7 +204,12 @@ export default function MainHeader() {
                   index === currentSlide ? "opacity-100" : "opacity-0"
                 }`}
               >
-                <Image src={item.src} alt={item.title} fill className="object-contain" />
+                <Image
+                  src={item.src}
+                  alt={item.title}
+                  fill
+                  className="object-contain"
+                />
                 <div className="absolute bottom-1 bg-black/50 text-white text-xs px-2 py-1 rounded">
                   {item.title}
                 </div>
