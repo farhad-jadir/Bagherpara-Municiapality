@@ -10,6 +10,7 @@ interface Citizen {
   fatherName?: string;
   motherName?: string;
   nationalId: string;
+  mobilenumber: number;
   wardNumber: number;
   occupation?: string;
   bloodGroup?: string;
@@ -32,6 +33,7 @@ export default function Nagoric() {
     fatherName: "",
     motherName: "",
     nationalId: "",
+    mobilenumber: "",
     wardNumber: "",
     occupation: "",
     bloodGroup: "",
@@ -129,6 +131,7 @@ export default function Nagoric() {
         fatherName: "",
         motherName: "",
         nationalId: "",
+        mobilenumber: "",
         wardNumber: "",
         occupation: "",
         bloodGroup: "",
@@ -233,6 +236,16 @@ export default function Nagoric() {
           required
         />
         <input
+          type="text"
+          placeholder="মোবাইল নাম্বার *"
+          value={formData.mobilenumber}
+          onChange={(e) =>
+            setFormData({ ...formData, mobilenumber: e.target.value })
+          }
+          className="border p-2 rounded"
+          required
+        />
+        <input
           type="number"
           placeholder="ওয়ার্ড নাম্বার *"
           value={formData.wardNumber}
@@ -328,6 +341,9 @@ export default function Nagoric() {
                       </p>
                       <p className="text-sm text-gray-600">
                         পেশা: {c.occupation || "N/A"} | রক্ত: {c.bloodGroup || "N/A"}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        মোবাইল: {c.mobilenumber }
                       </p>
                     </div>
                   </div>

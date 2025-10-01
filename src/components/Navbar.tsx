@@ -14,7 +14,7 @@ import ContactSubmenu from "./ContactSubmenu";
 import FaqSubmenu from "./FaqSubmenu";
 import PlansSubmenu from "./PlansSubmenu";
 import Logo from "./Logo";
-import { Search, Globe, Menu, X } from "lucide-react";
+import { Globe, Menu, X } from "lucide-react";
 
 interface MenuItem {
   title: string;
@@ -23,35 +23,31 @@ interface MenuItem {
 
 export default function Navbar() {
   const [active, setActive] = useState<string>("");
-  const [query, setQuery] = useState<string>("");
-  const [category, setCategory] = useState<string>("অফিসের খবর");
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
+  const [language, setLanguage] = useState<"bn" | "en">("bn");
   const router = useRouter();
 
   const menuItems: MenuItem[] = [];
+
+  const categoryItems = [
+    { title: "অফিসের খবর", href: "/office-news" },
+    { title: "নোটিশ", href: "/notices" },
+    { title: "টেন্ডার", href: "/tenders" },
+    { title: "নিয়োগ", href: "/recruitment" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
       setScrolled(isScrolled);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleSearch = (): void => {
-    if (query.trim()) {
-      router.push(`/search?query=${query}&type=${category}`);
-      setQuery("");
-    }
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
+  const toggleLanguage = () => {
+    setLanguage(language === "bn" ? "en" : "bn");
   };
 
   return (
@@ -60,88 +56,21 @@ export default function Navbar() {
         scrolled ? "bg-white shadow-lg" : "bg-transparent"
       }`}
     >
-      {/* 🔹 Top Header */}
-      <div className="bg-gradient-to-r from-purple-800 to-purple-600 text-white">
-        <div className="container mx-auto px-4 py-3">
-          {/* 🔹 মোবাইল ভিউ */}
-          <div className="flex items-center justify-between md:hidden">
-            {/* বাম পাশে: বাংলাদেশ জাতীয় তথ্য বাতায়ন */}
-            <div className="flex items-center">
-              <div className="w-3 h-3 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-              <span className="font-normal text-sm animate-pulse">
-                বাংলাদেশ জাতীয় তথ্য বাতায়ন
-              </span>
-            </div>
-
-            {/* ডান পাশে: হ্যামবার্গার */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="p-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors"
-            >
-              {menuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-
-          {/* 🔹 ডেস্কটপ ভিউ */}
-          <div className="hidden md:flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* বাম পাশে: বাংলাদেশ জাতীয় তথ্য বাতায়ন */}
-            <div className="flex items-center">
-              <div className="w-3 h-3 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-              <span className="font-normal text-base animate-pulse">
-                বাংলাদেশ জাতীয় তথ্য বাতায়ন
-              </span>
-            </div>
-
-            {/* Search + Language */}
-            <div className="flex flex-col md:flex-row items-center gap-3 w-full md:w-auto">
-              <div className="flex items-center bg-white rounded-lg overflow-hidden w-full md:w-auto">
-                {/* Category Select */}
-                <select
-                  value={category}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                    setCategory(e.target.value)
-                  }
-                  className="bg-gray-100 text-gray-700 px-3 py-2 border-r border-gray-300 focus:outline-none text-sm"
-                >
-                  <option value="অফিসের খবর">অফিসের খবর</option>
-                  <option value="নোটিশ">নোটিশ</option>
-                  <option value="টেন্ডার">টেন্ডার</option>
-                  <option value="নিয়োগ">নিয়োগ</option>
-                </select>
-
-                {/* Search Input */}
-                <div className="relative flex-1">
-                  <input
-                    type="text"
-                    placeholder="খুঁজুন..."
-                    value={query}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setQuery(e.target.value)
-                    }
-                    onKeyPress={handleKeyPress}
-                    className="w-full px-4 py-2 text-gray-800 focus:outline-none text-sm"
-                  />
-                  <button
-                    onClick={handleSearch}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-600"
-                  >
-                    <Search size={18} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Language Button */}
-              <button className="flex items-center gap-2 bg-white text-purple-700 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium">
-                <Globe size={16} />
-                English
-              </button>
-            </div>
-          </div>
+      {/* 🔹 Main Header with Logo Background */}
+      <div className="relative w-full">
+        {/* Logo as Background */}
+        <div className="w-full">
+          <Logo />
         </div>
-      </div>
 
-      {/* 🔹 Main Header with Logo */}
-      <Logo />
+        {/* 🔹 Hamburger Button on top of Logo */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden absolute top-10 right-4 z-20 bg-white/10 rounded-full p-2 shadow-md text-white hover:bg-purple-800 transition"
+        >
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
 
       {/* 🔹 Main Navigation */}
       <div className="bg-gradient-to-r from-purple-700 to-purple-800 shadow-lg">
@@ -175,17 +104,17 @@ export default function Navbar() {
 
           {/* Mobile Menu */}
           {menuOpen && (
-            <div className="md:hidden bg-white rounded-lg shadow-xl mt-2 p-4">
+            <div className="md:hidden bg-white rounded-lg shadow-xl mt-2 p-4 relative z-30">
               <div className="space-y-2">
-                <div className="bg-black border-b pb-2"><AboutSubmenu /></div>
-                <div className="bg-black border-b pb-2"><OfficersSubmenu /></div>
-                <div className="bg-black border-b pb-2"><ServicesSubmenu /></div>
-                <div className="bg-black border-b pb-2"><LawsSubmenu /></div>
-                <div className="bg-black border-b pb-2"><FormsSubmenu /></div>
-                <div className="bg-black border-b pb-2"><GallerySubmenu /></div>
-                <div className="bg-black border-b pb-2"><ContactSubmenu /></div>
-                <div className="bg-black border-b pb-2"><FaqSubmenu/></div>
-                <div className="bg-black border-b pb-2"><PlansSubmenu /></div>
+                <div className="border-b pb-2 bg-pink-800"><AboutSubmenu /></div>
+                <div className="border-b pb-2 bg-pink-800"><OfficersSubmenu /></div>
+                <div className="border-b pb-2 bg-pink-800"><ServicesSubmenu /></div>
+                <div className="border-b pb-2 bg-pink-800"><LawsSubmenu /></div>
+                <div className="border-b pb-2 bg-pink-800"><FormsSubmenu /></div>
+                <div className="border-b pb-2 bg-pink-800"><GallerySubmenu /></div>
+                <div className="border-b pb-2 bg-pink-800"><ContactSubmenu /></div>
+                <div className="border-b pb-2 bg-pink-800"><FaqSubmenu /></div>
+                <div className="border-b pb-2 bg-pink-800"><PlansSubmenu /></div>
 
                 {menuItems.map((item: MenuItem) => (
                   <Link
@@ -204,6 +133,15 @@ export default function Navbar() {
                     {item.title}
                   </Link>
                 ))}
+
+                {/* 🌐 Language in Mobile */}
+                <button
+                  onClick={toggleLanguage}
+                  className="w-full flex items-center justify-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium"
+                >
+                  <Globe size={16} />
+                  {language === "bn" ? "English" : "বাংলা"}
+                </button>
               </div>
             </div>
           )}
