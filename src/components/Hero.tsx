@@ -1,106 +1,142 @@
 "use client";
 
-import { FaFilePdf } from "react-icons/fa";
 import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+
+// ডাইনামিক ডাটা
+const notices = [
+  {
+    id: 1,
+    text: "📝 আগামী সোমবার পৌরসভায় ফ্রি মেডিকেল ক্যাম্প অনুষ্ঠিত হবে।",
+    date: "১০ অক্টোবর, ২০২৫",
+    href: "/notice/1",
+  },
+  {
+    id: 2,
+    text: "🏗️ সড়ক উন্নয়ন কাজের কারণে ৫নং ওয়ার্ডে যান চলাচল আংশিক বন্ধ থাকবে।",
+    date: "৮ অক্টোবর, ২০২৫",
+    href: "/notice/2",
+  },
+  {
+    id: 3,
+    text: "💡 বিদ্যুৎ সংযোগ মেরামতের কাজ চলায় ২ ঘন্টা বিদ্যুৎ বিভ্রাট থাকবে।",
+    date: "৬ অক্টোবর, ২০২৫",
+    href: "/notice/3",
+  },
+];
+
+const citizenInfo = [
+  "✅ নাম, পিতা/মাতার নাম",
+  "✅ জাতীয় পরিচয়পত্র / জন্ম নিবন্ধন",
+  "✅ ওয়ার্ড নং ও পেশা",
+  "✅ রক্তের গ্রুপ ও যোগাযোগ নম্বর",
+];
+
+const admin = {
+  name: "জনাব আলিমুজ্জামান",
+  role: "প্রশাসক, বাঘারপাড়া পৌরসভা",
+  img: "/images/ac.png",
+  messageLink: "/admin-message",
+};
 
 export default function Hero() {
-  const officeOrders = [
-    {
-      id: 1,
-      title: "বাঘারপা উপজেলার নবাগত উপজেলা ভূমি কমিশনার জনাব মাহির দেওয়ান বাঘারপাড়া পৌরসভার প্রশাসক হিসেবে দায়িত্ব পালন করবেন।",
-      date: "২৬-০৮-২০২৫",
-      pdfLink: "/pdfs/order1.pdf",
-    },
-    {
-      id: 2,
-      title: "বাঘারপাড়া পৌরসভার ওয়েবসাইট ডিজাইনের জন্য ফরহাদ হোসেন জনিকে দায়িত্ব দিয়েছেন বাঘারপাড়া উপজেলা প্রশাসক জনাব শোভন সরকার",
-      date: "২৬-০৮-২০২৫",
-      pdfLink: "/pdfs/order2.pdf",
-    },
-  ];
-
   return (
     <section className="relative bg-live-gradienttow text-white py-12">
-      <div className="max-w-7xl mx-auto px-4 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        {/* Left side: Title + Description */}
-        <div>
-          <h1 className="text-4xl md:text-5xl font-bold leading-snug mb-4">
-            বাঘারপাড়া পৌরসভা
+      <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        
+        {/* --------- Notice Card --------- */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="group bg-white/10 backdrop-blur-md p-5 rounded-xl shadow-lg flex flex-col border border-white/20 hover:border-yellow-400 transition"
+        >
+          <h1 className="text-2xl md:text-3xl font-bold leading-snug mb-4 flex items-center gap-2">
+            📢 নোটিশ
           </h1>
-          <p className="text-lg mb-6">
-            নাগরিক সেবা, আইন-নীতিমালা, পরিকল্পনা ও যোগাযোগ সম্পর্কিত সকল তথ্য এখানে পাওয়া যাবে।
-          </p>
-          <Link
-              href="/nagoric"
-              className="inline-block bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-yellow-300 transition">
-              আপনার নাগরিক তথ্য দিন
-          </Link>
 
-        </div>
-
-        {/* Right side: Office Orders */}
-        <div className="bg-white text-black rounded-xl shadow-lg overflow-hidden">
-          {/* Desktop Table */}
-          <div className="hidden md:block">
-            <div className="bg-gray-100 px-4 py-3 border-b border-gray-300">
-              <h2 className="text-lg font-semibold">📑 অফিস আদেশ</h2>
-            </div>
-            <table className="w-full text-sm md:text-base">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="border px-3 py-2">ক্রমিক</th>
-                  <th className="border px-3 py-2">শিরোনাম</th>
-                  <th className="border px-3 py-2">তারিখ</th>
-                  <th className="border px-3 py-2">ডাউনলোড</th>
-                </tr>
-              </thead>
-              <tbody>
-                {officeOrders.map((order) => (
-                  <tr key={order.id} className="hover:bg-gray-50">
-                    <td className="border px-3 py-2 text-center">{order.id}</td>
-                    <td className="border px-3 py-2">{order.title}</td>
-                    <td className="border px-3 py-2 text-center">{order.date}</td>
-                    <td className="border px-3 py-2 text-center">
-                      <FaFilePdf className="text-red-600 text-xl mx-auto cursor-pointer" />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="bg-gray-100 px-4 py-2 text-right">
-              <Link
-                href="/office-orders"
-                className="text-green-700 font-medium hover:underline"
+          <ul className="space-y-3 flex-grow">
+            {notices.map((notice) => (
+              <li
+                key={notice.id}
+                className="border-b border-white/10 pb-2 last:border-none"
               >
-                সব অফিস আদেশ →
-              </Link>
-            </div>
-          </div>
-
-          {/* Mobile Cards */}
-          <div className="md:hidden p-4 space-y-4">
-            {officeOrders.map((order) => (
-              <div
-                key={order.id}
-                className="bg-gray-50 p-4 rounded-lg shadow flex flex-col"
-              >
-                <p className="text-black text-sm mb-2">{order.title}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600 text-xs">{order.date}</span>
-                  <FaFilePdf className="text-red-600 text-lg cursor-pointer" />
-                </div>
-              </div>
+                <Link
+                  href={notice.href}
+                  className="text-sm hover:text-yellow-300 transition block"
+                >
+                  {notice.text}
+                </Link>
+                <p className="text-xs text-gray-300 mt-1">তারিখ: {notice.date}</p>
+              </li>
             ))}
-            <div className="text-right">
-              <Link
-                href="/office-orders"
-                className="text-green-700 font-medium hover:underline text-sm"
-              >
-                সব অফিস আদেশ →
-              </Link>
-            </div>
+          </ul>
+
+          <Link
+            href="/notice"
+            className="inline-block mt-4 bg-yellow-400 text-black font-semibold px-5 py-2.5 rounded-lg shadow-md hover:bg-yellow-300 hover:scale-105 transition text-sm text-center"
+          >
+            সব নোটিশ দেখুন →
+          </Link>
+        </motion.div>
+
+        {/* --------- Citizen Info Card --------- */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="group bg-white/10 backdrop-blur-md p-5 rounded-xl shadow-lg flex flex-col border border-white/20 hover:border-green-400 transition"
+        >
+          <h2 className="text-xl font-semibold mb-3">📝 নাগরিক তথ্য</h2>
+          <p className="text-sm mb-3 text-gray-200">
+            পৌরসভার উন্নয়ন কাজে আপনার সহযোগিতা প্রয়োজন। নিচের তথ্যসমূহ প্রদান করুন:
+          </p>
+
+          <ul className="text-sm text-gray-200 space-y-2 mb-4 flex-grow">
+            {citizenInfo.map((info, i) => (
+              <li key={i} className="flex items-center gap-2">
+                {info}
+              </li>
+            ))}
+          </ul>
+
+          <Link
+            href="/nagoric"
+            className="inline-block mt-auto bg-green-400 text-black font-semibold px-5 py-2.5 rounded-lg shadow-md hover:bg-green-300 hover:scale-105 transition text-sm text-center"
+          >
+            আপনার নাগরিক তথ্য দিন →
+          </Link>
+        </motion.div>
+
+        {/* --------- Admin Card --------- */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="group bg-white/10 backdrop-blur-md rounded-xl shadow-lg flex flex-col items-center text-center p-5 border border-white/20 hover:border-yellow-400 transition"
+        >
+          <div className="w-full h-56 md:h-64 relative mb-3 rounded-lg overflow-hidden shadow-lg group-hover:scale-[1.02] transition">
+            <Image
+              src={admin.img}
+              alt={admin.name}
+              fill
+              className="object-cover"
+            />
           </div>
-        </div>
+
+          <div className="mb-3">
+            <h3 className="text-base font-semibold">{admin.name}</h3>
+            <p className="text-xs text-gray-300">{admin.role}</p>
+          </div>
+
+          <Link
+            href={admin.messageLink}
+            className="block bg-yellow-400 text-black font-semibold px-5 py-2.5 rounded-lg shadow-md hover:bg-yellow-300 hover:scale-105 transition text-sm w-full"
+          >
+            প্রশাসকের বার্তা →
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
