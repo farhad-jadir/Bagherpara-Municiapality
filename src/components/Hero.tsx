@@ -60,7 +60,7 @@ export default function Hero() {
 
           <Link
             href="/notice"
-            className="inline-block mt-3 md:mt-4 bg-yellow-400 text-black font-semibold px-4 py-2 md:px-5 md:py-2.5 rounded-lg shadow-md hover:bg-yellow-300 transition text-xs md:text-sm text-center"
+            className="inline-block btn-dynamic secondary"
           >
             সব নোটিশ দেখুন →
           </Link>
@@ -87,7 +87,7 @@ export default function Hero() {
 
           <Link
             href={upazilaAdmin.messageLink}
-            className="block bg-green-400 text-black font-semibold px-4 py-2 md:px-5 md:py-2.5 rounded-lg shadow-md hover:bg-green-300 text-xs md:text-sm w-full"
+            className="block btn-dynamic secondary w-full"
           >
             বার্তা পড়ুন →
           </Link>
@@ -114,7 +114,7 @@ export default function Hero() {
 
           <Link
             href={admin.messageLink}
-            className="block bg-yellow-400 text-black font-semibold px-4 py-2 md:px-5 md:py-2.5 rounded-lg shadow-md hover:bg-yellow-300 text-xs md:text-sm w-full"
+            className="block btn-dynamic secondary w-full"
           >
             প্রশাসকের বার্তা →
           </Link>
