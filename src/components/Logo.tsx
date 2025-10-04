@@ -5,34 +5,89 @@ import Link from "next/link";
 
 export default function MainHeader() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
-  // ক্যারোজেল ছবির লিস্ট
-  const images = [
-    { src: "/images/muni.png", title: "বাঘারপাড়া পৌরসভা" },
-    { src: "/images/UNO.png", title: "শোভন সরকার, ইউএনও" },
-    { src: "/images/ac.png", title: "মাহির দেওয়ান, ভূমি কমিশনার" },
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+  const municipalCoordinates = {
+    lat: 23.22024722611398,
+    lng: 89.34913694563538,
+  };
+
+  // শুধু পৌরসভা ও ম্যাপ
+  const slides = [
+    { type: "image", src: "/images/muni.png", title: "বাঘারপাড়া পৌরসভা" },
+    { 
+      type: "map", 
+      title: "লোকেশন - বাঘারপাড়া পৌরসভা", 
+      mapUrl: `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=Bagherpara+Municipality,Jashore,Bangladesh&center=${municipalCoordinates.lat},${municipalCoordinates.lng}&zoom=15` 
+    },
   ];
 
-  // Auto Slide
+  // Preload map
+  useEffect(() => {
+    const preloadMap = () => {
+      const mapImage = new Image();
+      mapImage.src = `https://maps.googleapis.com/maps/api/staticmap?center=${municipalCoordinates.lat},${municipalCoordinates.lng}&zoom=15&size=400x200&markers=color:red%7C${municipalCoordinates.lat},${municipalCoordinates.lng}&key=${apiKey}`;
+      mapImage.onload = () => setMapLoaded(true);
+    };
+    
+    preloadMap();
+  }, [apiKey, municipalCoordinates.lat, municipalCoordinates.lng]);
+
+  // Auto Slide - 5 seconds interval
   useEffect(() => {
     const slideTimer = setInterval(
-      () => setCurrentSlide((prev) => (prev + 1) % images.length),
-      4000
+      () => setCurrentSlide((prev) => (prev + 1) % slides.length),
+      5000 // 5 seconds
     );
     return () => clearInterval(slideTimer);
-  }, [images.length]);
+  }, [slides.length]);
 
   return (
     <header className="relative w-full h-32 md:h-40 overflow-hidden">
       {/* Background Carousel */}
       <div className="absolute inset-0 w-full h-full">
-        <img
-          src={images[currentSlide].src}
-          alt={images[currentSlide].title}
-          className="w-full h-full object-cover transition-opacity duration-700"
-        />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/50"></div>
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            {slide.type === "image" ? (
+              <img
+                src={slide.src}
+                alt={slide.title}
+                className="w-full h-full object-cover"
+                loading="eager" // Prioritize loading
+              />
+            ) : (
+              <>
+                {/* Fallback static map while iframe loads */}
+                {!mapLoaded && (
+                  <img
+                    src={`https://maps.googleapis.com/maps/api/staticmap?center=${municipalCoordinates.lat},${municipalCoordinates.lng}&zoom=15&size=800x400&markers=color:red%7C${municipalCoordinates.lat},${municipalCoordinates.lng}&key=${apiKey}`}
+                    alt="Static Map"
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                  />
+                )}
+                <iframe
+                  src={slide.mapUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="eager" // Force eager loading
+                  allowFullScreen
+                  className={`w-full h-full ${mapLoaded ? 'block' : 'hidden'}`}
+                  onLoad={() => setMapLoaded(true)}
+                />
+              </>
+            )}
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/50"></div>
+          </div>
+        ))}
       </div>
 
       {/* Content */}
@@ -45,6 +100,7 @@ export default function MainHeader() {
                 src="/images/logo2.png"
                 alt="Logo"
                 className="w-12 h-12 md:w-14 md:h-14 object-contain"
+                loading="eager"
               />
             </div>
             <div className="absolute -bottom-1 -right-1 w-4 h-4 md:w-5 md:h-5 bg-green-500 rounded-full border-2 border-white"></div>

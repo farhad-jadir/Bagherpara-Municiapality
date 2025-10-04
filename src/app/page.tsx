@@ -1,6 +1,6 @@
 import HeroSection from "../components/Hero";
 import Heading from "@/components/Heading";
-import Complain from "@/components/Complain";
+
 import PublicHearing from "@/components/PublicHearingWithMap";
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
         {/* ✅ Hero Section যুক্ত করা হলো */}
         <HeroSection  />
         <PublicHearing/>
-        <Complain  />
+        
         
       </main>
     </>
