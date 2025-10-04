@@ -24,13 +24,13 @@ export default function Footer() {
       id: 1, 
       name: "ফরহাদ হোসেন জনি", 
       role: "ফুলস্ট্যাক ডেভেলপার", 
-      img: "/images/jony.png",
+      img: "/images/jnn.jpg",
     },
     { 
       id: 2, 
-      name: "আলিমুজ্জামান", 
+      name: "ফরহাদ হোসেন জনি", 
       role: "ফ্রন্টএন্ড ডেভেলপার", 
-      img: "/images/jony.png",
+      img: "/images/jnn.jpg",
     },
   ];
 

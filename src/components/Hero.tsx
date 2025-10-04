@@ -25,14 +25,14 @@ const notices = [
 ];
 
 const admin = {
-  name: "জনাব আলিমুজ্জামান",
+  name: "জনাব মাহির দেওয়ান",
   role: "প্রশাসক, বাঘারপাড়া পৌরসভা",
   img: "/images/ac.png",
   messageLink: "/admin-message",
 };
 
 const upazilaAdmin = {
-  name: "জনাব সাইফুল ইসলাম",
+  name: "জনাব শোভন সরকার",
   role: "উপজেলা নির্বাহী অফিসার, বাঘারপাড়া উপজেলা",
   img: "/images/UNO.png",
   messageLink: "/upazila-message",
@@ -80,7 +80,7 @@ export default function Hero() {
           </div>
 
           <div className="mb-3 flex-1">
-            <h2 className="text-sm md:text-base font-semibold">🏛️ উপজেলা প্রশাসকের বার্তা</h2>
+           
             <h3 className="text-sm font-semibold mt-1">{upazilaAdmin.name}</h3>
             <p className="text-xs text-gray-300 mt-1">{upazilaAdmin.role}</p>
           </div>
@@ -89,7 +89,7 @@ export default function Hero() {
             href={upazilaAdmin.messageLink}
             className="block btn-dynamic secondary w-full"
           >
-            বার্তা পড়ুন →
+            উপজেলা প্রশাসকের বার্তা →
           </Link>
         </div>
 
@@ -107,7 +107,7 @@ export default function Hero() {
           </div>
 
           <div className="mb-3 flex-1">
-            <h2 className="text-sm md:text-base font-semibold">🏢 পৌর প্রশাসকের বার্তা</h2>
+            
             <h3 className="text-sm font-semibold mt-1">{admin.name}</h3>
             <p className="text-xs text-gray-300 mt-1">{admin.role}</p>
           </div>
@@ -116,7 +116,7 @@ export default function Hero() {
             href={admin.messageLink}
             className="block btn-dynamic secondary w-full"
           >
-            প্রশাসকের বার্তা →
+           পৌরসভা প্রশাসকের বার্তা →
           </Link>
         </div>
 
