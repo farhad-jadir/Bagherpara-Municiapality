@@ -5,34 +5,12 @@ import Link from "next/link";
 
 export default function MainHeader() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [mapLoaded, setMapLoaded] = useState(false);
 
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-  const municipalCoordinates = {
-    lat: 23.22024722611398,
-    lng: 89.34913694563538,
-  };
-
-  // শুধু পৌরসভা ও ম্যাপ
+  // শুধু পৌরসভা ও ইউএনও ছবি
   const slides = [
     { type: "image", src: "/images/muni.png", title: "বাঘারপাড়া পৌরসভা" },
-    { 
-      type: "map", 
-      title: "লোকেশন - বাঘারপাড়া পৌরসভা", 
-      mapUrl: `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=Bagherpara+Municipality,Jashore,Bangladesh&center=${municipalCoordinates.lat},${municipalCoordinates.lng}&zoom=15` 
-    },
+    { type: "image", src: "/images/map.PNG", title: "উপজেলা নির্বাহী অফিসার" },
   ];
-
-  // Preload map
-  useEffect(() => {
-    const preloadMap = () => {
-      const mapImage = new Image();
-      mapImage.src = `https://maps.googleapis.com/maps/api/staticmap?center=${municipalCoordinates.lat},${municipalCoordinates.lng}&zoom=15&size=400x200&markers=color:red%7C${municipalCoordinates.lat},${municipalCoordinates.lng}&key=${apiKey}`;
-      mapImage.onload = () => setMapLoaded(true);
-    };
-    
-    preloadMap();
-  }, [apiKey, municipalCoordinates.lat, municipalCoordinates.lng]);
 
   // Auto Slide - 5 seconds interval
   useEffect(() => {
@@ -51,39 +29,15 @@ export default function MainHeader() {
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
+              index === currentSlide ? "opacity-100" : "opacity-0"
             }`}
           >
-            {slide.type === "image" ? (
-              <img
-                src={slide.src}
-                alt={slide.title}
-                className="w-full h-full object-cover"
-                loading="eager" // Prioritize loading
-              />
-            ) : (
-              <>
-                {/* Fallback static map while iframe loads */}
-                {!mapLoaded && (
-                  <img
-                    src={`https://maps.googleapis.com/maps/api/staticmap?center=${municipalCoordinates.lat},${municipalCoordinates.lng}&zoom=15&size=800x400&markers=color:red%7C${municipalCoordinates.lat},${municipalCoordinates.lng}&key=${apiKey}`}
-                    alt="Static Map"
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                  />
-                )}
-                <iframe
-                  src={slide.mapUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  loading="eager" // Force eager loading
-                  allowFullScreen
-                  className={`w-full h-full ${mapLoaded ? 'block' : 'hidden'}`}
-                  onLoad={() => setMapLoaded(true)}
-                />
-              </>
-            )}
+            <img
+              src={slide.src}
+              alt={slide.title}
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/50"></div>
           </div>

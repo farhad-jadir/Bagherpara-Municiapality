@@ -42,7 +42,7 @@ const upazilaAdmin = {
 
 export default function Hero() {
   return (
-    <section className="relative bbg-live-gradienttow text-white py-8 md:py-12">
+    <section className="relative bg-live-gradienttow text-white py-8 md:py-12">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-stretch">
         
         {/* --------- Notice Card --------- */}
