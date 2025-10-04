@@ -120,15 +120,15 @@ body {
 
 /* Secondary color variant */
 .btn-dynamic.secondary {
-  background-color: #68f504; /* yellow-400 */
-  color: #3a0303;
+  background-color: #1f4603; /* yellow-400 */
+  color: #f2adad;
   border-color: #c9f907;
 }
 
 .btn-dynamic.secondary:hover {
-  background-color: #A020F0; /* yellow-500 */
+  background-color: #02250c; /* yellow-500 */
   color: #ffffff;
-  border-color: #b0f307;
+  border-color: #18dd06;
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
