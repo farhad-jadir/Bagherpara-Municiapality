@@ -1,4 +1,3 @@
-// components/Navbar.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -30,24 +29,19 @@ export default function Navbar() {
 
   const menuItems: MenuItem[] = [];
 
-  const categoryItems = [
-    { title: "অফিসের খবর", href: "/office-news" },
-    { title: "নোটিশ", href: "/notices" },
-    { title: "টেন্ডার", href: "/tenders" },
-    { title: "নিয়োগ", href: "/recruitment" },
-  ];
-
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 50;
-      setScrolled(isScrolled);
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleLanguage = () => {
-    setLanguage(language === "bn" ? "en" : "bn");
+  const toggleLanguage = () => setLanguage(language === "bn" ? "en" : "bn");
+
+  // 🔹 যখন সাবমেনু থেকে কিছু সিলেক্ট হবে তখন মোবাইল মেনু হাইড করবে
+  const handleSubmenuSelect = () => {
+    setMenuOpen(false);
   };
 
   return (
@@ -56,14 +50,12 @@ export default function Navbar() {
         scrolled ? "bg-white shadow-lg" : "bg-transparent"
       }`}
     >
-      {/* 🔹 Main Header with Logo Background */}
+      {/* 🔹 Logo section with Menu Button */}
       <div className="relative w-full">
-        {/* Logo as Background */}
         <div className="w-full">
           <Logo />
         </div>
 
-        {/* 🔹 Hamburger Button on top of Logo */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden absolute top-10 right-4 z-20 bg-white/10 rounded-full p-2 shadow-md text-white hover:bg-purple-800 transition"
@@ -86,35 +78,39 @@ export default function Navbar() {
             <li><ContactSubmenu /></li>
             <li><FaqSubmenu /></li>
             <li><PlansSubmenu /></li>
-
-            {menuItems.map((item: MenuItem) => (
-              <li key={item.title}>
-                <Link
-                  href={item.href}
-                  className={`px-4 py-2 text-white hover:bg-purple-600 rounded-lg transition-all duration-200 ${
-                    active === item.href ? "bg-purple-600 font-semibold" : ""
-                  }`}
-                  onClick={() => setActive(item.href)}
-                >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
           </ul>
 
           {/* Mobile Menu */}
           {menuOpen && (
             <div className="md:hidden bg-white rounded-lg shadow-xl mt-2 p-4 relative z-30">
               <div className="space-y-2">
-                <div className="border-b pb-2 bg-pink-800"><AboutSubmenu /></div>
-                <div className="border-b pb-2 bg-pink-800"><OfficersSubmenu /></div>
-                <div className="border-b pb-2 bg-pink-800"><ServicesSubmenu /></div>
-                <div className="border-b pb-2 bg-pink-800"><LawsSubmenu /></div>
-                <div className="border-b pb-2 bg-pink-800"><FormsSubmenu /></div>
-                <div className="border-b pb-2 bg-pink-800"><GallerySubmenu /></div>
-                <div className="border-b pb-2 bg-pink-800"><ContactSubmenu /></div>
-                <div className="border-b pb-2 bg-pink-800"><FaqSubmenu /></div>
-                <div className="border-b pb-2 bg-pink-800"><PlansSubmenu /></div>
+                <div className="border-b pb-2 bg-gray-800 text-white">
+                  <AboutSubmenu onSelect={handleSubmenuSelect} />
+                </div>
+                <div className="border-b pb-2 bg-gray-800 text-white">
+                  <OfficersSubmenu onSelect={handleSubmenuSelect} />
+                </div>
+                <div className="border-b pb-2 bg-gray-800 text-white">
+                  <ServicesSubmenu onSelect={handleSubmenuSelect} />
+                </div>
+                <div className="border-b pb-2 bg-gray-800 text-white">
+                  <LawsSubmenu onSelect={handleSubmenuSelect} />
+                </div>
+                <div className="border-b pb-2 bg-gray-800 text-white">
+                  <FormsSubmenu onSelect={handleSubmenuSelect} />
+                </div>
+                <div className="border-b pb-2 bg-gray-800 text-white">
+                  <GallerySubmenu onSelect={handleSubmenuSelect} />
+                </div>
+                <div className="border-b pb-2 bg-gray-800 text-white">
+                  <ContactSubmenu onSelect={handleSubmenuSelect} />
+                </div>
+                <div className="border-b pb-2 bg-gray-800 text-white">
+                  <FaqSubmenu onSelect={handleSubmenuSelect} />
+                </div>
+                <div className="border-b pb-2 bg-gray-800 text-white">
+                  <PlansSubmenu onSelect={handleSubmenuSelect} />
+                </div>
 
                 {menuItems.map((item: MenuItem) => (
                   <Link
@@ -133,15 +129,6 @@ export default function Navbar() {
                     {item.title}
                   </Link>
                 ))}
-
-                {/* 🌐 Language in Mobile */}
-                <button
-                  onClick={toggleLanguage}
-                  className="w-full flex items-center justify-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium"
-                >
-                  <Globe size={16} />
-                  {language === "bn" ? "English" : "বাংলা"}
-                </button>
               </div>
             </div>
           )}

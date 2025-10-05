@@ -128,10 +128,10 @@ export default function Complain() {
             />
           </div>
 
-          {/* সাবমিট বাটন */}
+          {/* সাবমিট বাটন - Global Button Class Applied */}
           <button
             type="submit"
-            className={`w-full text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 shadow-md flex items-center justify-center gap-2 ${
+            className={`btn-dynamic secondary w-full py-3 flex items-center justify-center gap-2 ${
               activeTab === "complain"
                 ? "bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700"
                 : "bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700"
@@ -245,10 +245,10 @@ export default function Complain() {
               </div>
             </div>
 
-            {/* মডালের সাবমিট */}
+            {/* মডালের সাবমিট - Global Button Class Applied */}
             <button
               onClick={handleSubmit}
-              className="mt-5 w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all"
+              className="btn-dynamic secondary w-full py-3 mt-5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all"
             >
               জমা দিন
             </button>

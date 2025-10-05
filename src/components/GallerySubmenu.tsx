@@ -1,86 +1,223 @@
-// components/GallerySubmenu.tsx
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
 interface SubmenuItem {
   title: string;
   href: string;
+  icon?: string;
+  description?: string;
 }
 
-export default function GallerySubmenu() {
+interface GallerySubmenuProps {
+  onSelect?: () => void;
+}
+
+export default function GallerySubmenu({ onSelect }: GallerySubmenuProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const submenuItems: SubmenuItem[] = [
-    { title: "ফটো গ্যালারি", href: "/gallery/photos" },
-    { title: "ভিডিও গ্যালারি", href: "/gallery/videos" },
+    { 
+      title: "ফটো গ্যালারি", 
+      href: "/gallery/photos", 
+      icon: "🖼️", 
+      description: "ছবির সংগ্রহ" 
+    },
+    { 
+      title: "ভিডিও গ্যালারি", 
+      href: "/gallery/videos", 
+      icon: "🎥", 
+      description: "ভিডিও সংগ্রহ" 
+    },
+    { 
+      title: "ইভেন্ট গ্যালারি", 
+      href: "/gallery/events", 
+      icon: "🎉", 
+      description: "বিশেষ অনুষ্ঠান" 
+    },
+    { 
+      title: "প্রকল্প গ্যালারি", 
+      href: "/gallery/projects", 
+      icon: "🏗️", 
+      description: "উন্নয়ন প্রকল্প" 
+    },
   ];
 
-  const handleMouseEnter = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
+  // 🔹 Detect mobile screen
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // 🔹 Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
     }
-    setIsOpen(true);
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    if (!isMobile) {
+      setIsOpen(true);
+    }
   };
 
   const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => {
-      setIsOpen(false);
-    }, 300);
+    if (!isMobile) {
+      timeoutRef.current = setTimeout(() => {
+        setIsOpen(false);
+      }, 250);
+    }
+  };
+
+  const handleToggle = () => {
+    if (isMobile) {
+      setIsOpen(!isOpen);
+    }
+  };
+
+  const handleItemClick = () => {
+    setIsOpen(false);
+    onSelect?.();
   };
 
   return (
-    <div 
-      className="relative"
+    <div
+      ref={menuRef}
+      className="relative select-none"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
+      {/* 🔹 Main Button */}
       <button
-        className="relative group px-4 py-2 font-normal text-white
-                   shadow-md hover:shadow-lg
-                   transition-all duration-500 ease-in-out 
-                   overflow-hidden cursor-pointer "
+        type="button"
+        className="relative group w-full md:w-auto px-4 py-3 md:py-2 text-white font-normal shadow-md hover:shadow-lg
+                   transition-all duration-500 ease-in-out cursor-pointer border-b md:border-b-0 border-white/20 md:border-none"
         aria-expanded={isOpen}
         aria-haspopup="true"
+        onClick={handleToggle}
       >
-        {/* 🔹 Default Text */}
-        <span className="flex items-center relative z-10">
-          📷 গ্যালারি
+        {/* Hover Gradient Background */}
+        {!isMobile && (
+          <span
+            className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 
+                       opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded"
+          ></span>
+        )}
+
+        {/* Button Text */}
+        <span className="flex items-center justify-between md:justify-start relative z-10">
+          <span className="flex items-center">
+            <span className="mr-2">📷</span>
+            গ্যালারি
+          </span>
+
+          {/* Mobile Dropdown Arrow */}
+          {isMobile && (
+            <svg
+              className={`w-4 h-4 ml-2 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          )}
         </span>
 
-        {/* 🔹 Hover Gradient Background */}
-        <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 
-                       opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded"></span>
-
-        {/* 🔹 Hover Text */}
-        <span className="absolute inset-0 flex items-center justify-center font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          📷 গ্যালারি
-        </span>
-
-        {/* 🔹 Bottom Border Animation */}
-        <span className="absolute bottom-0 left-0 w-0 h-[3px] bg-blue-500 group-hover:w-full transition-all duration-500"></span>
+        {/* Bottom Border Animation */}
+        {!isMobile && (
+          <span
+            className="absolute bottom-0 left-0 w-0 h-[3px] bg-blue-400 
+                       group-hover:w-full transition-all duration-500"
+          ></span>
+        )}
       </button>
 
-      
+      {/* 🔹 Dropdown Menu */}
       {isOpen && (
-        <div 
-          className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50"
+        <div
+          className="absolute md:absolute top-full left-0 md:left-auto md:right-0 mt-0 md:mt-2 
+                     w-full md:w-80 bg-white rounded-none md:rounded-lg shadow-xl border border-gray-200 
+                     z-50 max-h-[80vh] md:max-h-none overflow-y-auto md:overflow-visible"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="py-2">
-            {submenuItems.map((item: SubmenuItem) => (
-              <Link
-                key={item.title}
-                href={item.href}
-                className="block px-4 py-2 text-gray-800 hover:bg-purple-100 hover:text-purple-800 transition-colors duration-200"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.title}
-              </Link>
-            ))}
+          <div className="p-3 md:p-4">
+            <h3 className="text-base md:text-lg font-bold text-gray-800 mb-3 border-b pb-2">
+              মিডিয়া গ্যালারি
+            </h3>
+
+            <div className="space-y-1 md:space-y-2">
+              {submenuItems.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  onClick={handleItemClick}
+                  className="flex items-start p-2 md:p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 group border-b md:border-b-0 border-gray-100 last:border-b-0"
+                >
+                  <span className="text-xl md:text-2xl mr-2 md:mr-3 flex-shrink-0">{item.icon}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-gray-800 group-hover:text-blue-700 text-sm md:text-base">
+                      {item.title}
+                    </p>
+                    <p className="text-xs md:text-sm text-gray-600">{item.description}</p>
+                  </div>
+                  <span className="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-2">
+                    →
+                  </span>
+                </Link>
+              ))}
+            </div>
+
+            {/* 🔹 Gallery Stats */}
+            <div className="mt-3 md:mt-4 p-2 md:p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-xs md:text-sm text-blue-800 font-medium">📊 গ্যালারি পরিসংখ্যান</p>
+                <span className="text-blue-600 font-bold text-sm md:text-base">সক্রিয়</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs text-blue-700">
+                <div className="text-center">
+                  <p className="font-bold">500+</p>
+                  <p className="text-blue-600">ছবি</p>
+                </div>
+                <div className="text-center">
+                  <p className="font-bold">50+</p>
+                  <p className="text-blue-600">ভিডিও</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 🔹 Mobile Close Button */}
+            {isMobile && (
+              <div className="mt-3 pt-3 border-t border-gray-200">
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="w-full py-2 text-center text-red-600 font-medium hover:bg-red-50 rounded transition-colors duration-200 text-sm"
+                >
+                  বন্ধ করুন
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

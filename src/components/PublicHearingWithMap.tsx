@@ -27,10 +27,10 @@ export default function PublicHearingWithMap() {
   const [session] = useState<HearingSession>({
     id: 1,
     title: "বার্ষিক বাজেট গণশুনানি ২০২৪",
-    date: "১৫ ডিসেম্বর ২০২৪",
+    date: "১৫ জুলাই ২০২৫",
     time: "সকাল ১০:০০ - দুপুর ১:০০",
     description:
-      "২০২৪-২০২৫ অর্থবছরের প্রস্তাবিত বাজেট নিয়ে গণশুনানি। সকল নাগরিকদের অংশগ্রহণ সাদরভাবে গ্রহণযোগ্য।",
+      "২০২৫-২০২৬ অর্থবছরের প্রস্তাবিত বাজেট নিয়ে গণশুনানি। সকল নাগরিকদের অংশগ্রহণ সাদরভাবে গ্রহণযোগ্য।",
     participants: 156,
     status: "live",
     meetingLink: "https://calendar.app.google/4s4PpokXLy2yniKa8",
@@ -41,90 +41,90 @@ export default function PublicHearingWithMap() {
   };
 
   return (
-    <div className="bg-live-gradient max-w-7xl mx-auto px-4 md:px-8 py-8 bg-white rounded-xl shadow-2xl overflow-hidden">
+    <div className="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 rounded-xl shadow-lg overflow-hidden">
       {/* হেডার */}
-      <div className="bg-gradient-to-r from-blue-700 to-purple-700 rounded-xl py-6 text-center">
-        <h1 className="text-2xl font-bold text-white">
+      <div className="bg-gradient-to-r from-blue-700 to-purple-700 rounded-xl py-4 sm:py-6 text-center">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white px-2">
           অনলাইন গণশুনানি ও অভিযোগ
         </h1>
-        <p className="text-blue-100 mt-2">
+        <p className="text-blue-100 mt-2 text-sm sm:text-base px-2">
           বাঘারপাড়া পৌরসভা - নাগরিক অংশগ্রহণ
         </p>
       </div>
 
       {/* মূল কনটেন্ট */}
-      <div className=" grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mt-6 sm:mt-8 items-stretch">
         {/* বাম পাশ - গণশুনানি */}
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 shadow-lg border border-blue-200 flex flex-col justify-between h-full">
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 sm:p-6 shadow-lg border border-blue-200 flex flex-col justify-between h-full">
           <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 bg-blue-100 rounded-full">
-                <Video className="text-blue-600" size={24} />
+            <div className="flex items-center gap-3 mb-4 sm:mb-6">
+              <div className="p-2 sm:p-3 bg-blue-100 rounded-full">
+                <Video className="text-blue-600" size={20} />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-blue-800">
+                <h2 className="text-lg sm:text-xl font-bold text-blue-800">
                   লাইভ গণশুনানি
                 </h2>
-                <p className="text-blue-600 text-sm">সরাসরি অংশগ্রহণ করুন</p>
+                <p className="text-blue-600 text-xs sm:text-sm">সরাসরি অংশগ্রহণ করুন</p>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg p-4 mb-6 shadow-sm">
-              <h3 className="font-semibold text-gray-800 mb-2">
+            <div className="bg-white rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 shadow-sm">
+              <h3 className="font-semibold text-gray-800 mb-2 text-sm sm:text-base">
                 {session.title}
               </h3>
 
-              <div className="grid grid-cols-2 gap-4 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
                 <div className="flex items-center gap-2">
-                  <Calendar size={18} className="text-blue-600" />
+                  <Calendar size={16} className="text-blue-600 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-gray-600">তারিখ</p>
-                    <p className="font-semibold text-sm">{session.date}</p>
+                    <p className="text-xs text-gray-600">তারিখ</p>
+                    <p className="font-semibold text-xs sm:text-sm">{session.date}</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Clock size={18} className="text-blue-600" />
+                  <Clock size={16} className="text-blue-600 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-gray-600">সময়</p>
-                    <p className="font-semibold text-sm">{session.time}</p>
+                    <p className="text-xs text-gray-600">সময়</p>
+                    <p className="font-semibold text-xs sm:text-sm">{session.time}</p>
                   </div>
                 </div>
               </div>
 
-              <p className="text-gray-700 text-sm mb-4">
+              <p className="text-gray-700 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
                 {session.description}
               </p>
 
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0 mb-3 sm:mb-4">
                 <div className="flex items-center gap-2">
-                  <Users size={18} className="text-green-600" />
-                  <span className="font-semibold text-sm">
+                  <Users size={16} className="text-green-600" />
+                  <span className="font-semibold text-xs sm:text-sm">
                     {session.participants} জন অনলাইনে
                   </span>
                 </div>
 
-                <span className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs animate-pulse">
+                <span className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs animate-pulse w-fit">
                   লাইভ
                 </span>
               </div>
 
               <button
                 onClick={joinGoogleMeet}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                className="btn-dynamic secondary w-full py-3 text-white bg-blue-600 hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
               >
                 <Video size={18} />
-                গণশুনানিতে যোগ দিন
+                <span>গণশুনানিতে যোগ দিন</span>
                 <ExternalLink size={16} />
               </button>
             </div>
           </div>
 
           {/* ✅ নাগরিক তথ্য বাটন */}
-          <div className="mt-auto">
+          <div className="mt-4 sm:mt-6">
             <Link
               href="/nagoric"
-              className="block bg-green-400 text-black font-semibold px-5 py-3 rounded-lg shadow-md hover:bg-green-300 hover:scale-105 transition text-sm text-center"
+              className="btn-dynamic secondary w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg shadow-md hover:scale-105 transition-transform duration-200 text-sm text-center block"
             >
               আপনার নাগরিক তথ্য দিন →
             </Link>
