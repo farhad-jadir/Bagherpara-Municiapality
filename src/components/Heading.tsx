@@ -205,7 +205,7 @@ export default function Heading({
     };
   }, [speedPxPerSec]);
 
-  // 🔹 Simplified label rotation
+  // 🔹 Simplified label rotation - শুধু মোবাইলের জন্য
   const labels = useMemo(() => [
     { text: "স্বাগতম" },
     { text: "বাঘারপাড়া পৌরসভা" },
@@ -220,7 +220,7 @@ export default function Heading({
       if (!isHovered) {
         setLabelIndex((prev) => (prev + 1) % labels.length);
       }
-    }, 4000); // Increased interval for better performance
+    }, 4000);
     return () => clearInterval(interval);
   }, [isHovered, labels.length]);
 
@@ -292,7 +292,7 @@ export default function Heading({
           ref={containerRef}
           className="relative overflow-hidden border-y border-white/20 w-full bg-gradient-to-r from-purple-700/95 to-purple-600/95"
         >
-          {/* Left Label */}
+          {/* Left Label - শুধু ডেস্কটপে দেখাবে */}
           <Link 
             href="/"
             className="absolute inset-y-0 left-0 z-20 flex items-center pl-3 pr-4 sm:pl-4 sm:pr-6 bg-gradient-to-r from-purple-800 to-purple-700 border-r border-white/10 cursor-pointer hover:bg-purple-900/80 transition-all duration-300 shadow-lg group"
@@ -307,7 +307,8 @@ export default function Heading({
                   className="text-yellow-300 group-hover:scale-110 group-hover:text-white transition-all duration-300"
                 />
               )}
-              <span className="text-xs sm:text-sm font-bold tracking-wider flex items-center gap-1">
+              {/* মোবাইলে শুধু আইকন, ডেস্কটপে আইকন + টেক্সট */}
+              <span className="hidden sm:block text-xs sm:text-sm font-bold tracking-wider flex items-center gap-1">
                 <span className="text-yellow-300 group-hover:text-white transition-colors duration-300">
                   {labels[labelIndex].icon}
                 </span>
@@ -319,14 +320,15 @@ export default function Heading({
           </Link>
 
           {/* Gradient Masks */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-24 bg-gradient-to-r from-purple-700 to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-purple-600 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-24 bg-gradient-to-r from-purple-700 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-24 bg-gradient-to-l from-purple-600 to-transparent z-10" />
 
           {/* Marquee Track */}
           <div className="relative">
             <div
               ref={trackRef}
-              className="pl-20 sm:pl-28 py-2"
+              // মোবাইলে কম প্যাডিং, ডেস্কটপে আগের মতো
+              className="pl-12 sm:pl-28 py-2"
               style={{
                 animation: `headline-scroll ${duration}s linear infinite ${paused ? 'paused' : 'running'}`,
                 whiteSpace: "nowrap",
