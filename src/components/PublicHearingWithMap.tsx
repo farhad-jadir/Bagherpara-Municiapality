@@ -1,14 +1,7 @@
-// components/PublicHearingWithMap.tsx
 "use client";
 
 import { useState } from "react";
-import { 
-  Video, 
-  Users, 
-  Calendar, 
-  Clock, 
-  ExternalLink
-} from "lucide-react";
+import { Video, Users, Calendar, Clock, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Complain from "./Complain";
 
@@ -41,8 +34,8 @@ export default function PublicHearingWithMap() {
   };
 
   return (
-    <div className="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 rounded-xl shadow-lg overflow-hidden">
-      {/* হেডার */}
+    <div className="bg-live-gradienttow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 shadow-lg overflow-hidden">
+      {/* 🟦 হেডার */}
       <div className="bg-gradient-to-r from-blue-700 to-purple-700 rounded-xl py-4 sm:py-6 text-center">
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white px-2">
           অনলাইন গণশুনানি ও অভিযোগ
@@ -52,10 +45,10 @@ export default function PublicHearingWithMap() {
         </p>
       </div>
 
-      {/* মূল কনটেন্ট */}
+      {/* 🟨 মূল কনটেন্ট */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mt-6 sm:mt-8 items-stretch">
-        {/* বাম পাশ - গণশুনানি */}
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 sm:p-6 shadow-lg border border-blue-200 flex flex-col justify-between h-full">
+        {/* 🔵 বাম পাশ - গণশুনানি */}
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 sm:p-6 shadow-lg border border-blue-200 flex flex-col justify-between h-full transition-all duration-300 hover:shadow-xl">
           <div>
             <div className="flex items-center gap-3 mb-4 sm:mb-6">
               <div className="p-2 sm:p-3 bg-blue-100 rounded-full">
@@ -65,29 +58,41 @@ export default function PublicHearingWithMap() {
                 <h2 className="text-lg sm:text-xl font-bold text-blue-800">
                   লাইভ গণশুনানি
                 </h2>
-                <p className="text-blue-600 text-xs sm:text-sm">সরাসরি অংশগ্রহণ করুন</p>
+                <p className="text-blue-600 text-xs sm:text-sm">
+                  সরাসরি অংশগ্রহণ করুন
+                </p>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 shadow-sm">
+            <div className="bg-white rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 shadow-sm hover:shadow-md transition-all duration-300">
               <h3 className="font-semibold text-gray-800 mb-2 text-sm sm:text-base">
                 {session.title}
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
                 <div className="flex items-center gap-2">
-                  <Calendar size={16} className="text-blue-600 flex-shrink-0" />
+                  <Calendar
+                    size={16}
+                    className="text-blue-600 flex-shrink-0"
+                  />
                   <div>
                     <p className="text-xs text-gray-600">তারিখ</p>
-                    <p className="font-semibold text-xs sm:text-sm">{session.date}</p>
+                    <p className="font-semibold text-xs sm:text-sm">
+                      {session.date}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Clock size={16} className="text-blue-600 flex-shrink-0" />
+                  <Clock
+                    size={16}
+                    className="text-blue-600 flex-shrink-0"
+                  />
                   <div>
                     <p className="text-xs text-gray-600">সময়</p>
-                    <p className="font-semibold text-xs sm:text-sm">{session.time}</p>
+                    <p className="font-semibold text-xs sm:text-sm">
+                      {session.time}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -109,29 +114,32 @@ export default function PublicHearingWithMap() {
                 </span>
               </div>
 
-              <button
-                onClick={joinGoogleMeet}
-                className="btn-dynamic secondary w-full py-3 text-white bg-blue-600 hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
-              >
-                <Video size={18} />
-                <span>গণশুনানিতে যোগ দিন</span>
-                <ExternalLink size={16} />
-              </button>
+              {/* ✅ বাটন কেন্দ্রাভিমুখে */}
+              <div className="flex justify-center mt-4">
+                <button
+                  onClick={joinGoogleMeet}
+                  className="btn-dynamic secondary flex w-full md:w-67 items-center gap-2"
+                >
+                  <Video size={18} />
+                  <span>গণশুনানিতে যোগ দিন</span>
+                  <ExternalLink size={16} />
+                </button>
+              </div>
             </div>
           </div>
 
           {/* ✅ নাগরিক তথ্য বাটন */}
-          <div className="mt-4 sm:mt-6">
+          <div className="mt-4 sm:mt-6 flex justify-center">
             <Link
               href="/nagoric"
-              className="btn-dynamic secondary w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg shadow-md hover:scale-105 transition-transform duration-200 text-sm text-center block"
+              className="btn-dynamic secondary w-full md:w-1/2 text-center"
             >
               আপনার নাগরিক তথ্য দিন →
             </Link>
           </div>
         </div>
 
-        {/* ডান পাশ - অভিযোগ ফর্ম */}
+        {/* 🟣 ডান পাশ - অভিযোগ ফর্ম */}
         <div className="h-full">
           <Complain />
         </div>

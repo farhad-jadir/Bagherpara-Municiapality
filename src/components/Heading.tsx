@@ -279,7 +279,7 @@ export default function Heading({
 
   return (
     <div
-      className={`w-full bg-gradient-to-r from-purple-700 via-purple-600 to-purple-700 text-white sticky top-0 z-50 transition-transform duration-300 ${
+      className={`w-full bg-gradient-to-r from-gray-700 via-gray-600 to-gray-900 text-white sticky top-0 z-50 transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       } shadow-lg ${className}`}
     >
@@ -296,12 +296,12 @@ export default function Heading({
       >
         <div
           ref={containerRef}
-          className="relative overflow-hidden border-y border-white/20 w-full bg-gradient-to-r from-purple-700/95 to-purple-600/95"
+          className="relative overflow-hidden border-y border-white/20 w-full bg-gradient-to-r from-gray-800 to-gray-700"
         >
           {/* Left Label */}
           <Link
             href="/"
-            className="absolute inset-y-0 left-0 z-20 flex items-center pl-3 pr-4 sm:pl-4 sm:pr-6 bg-gradient-to-r from-purple-800/70 to-purple-700 border-r border-white/10 cursor-pointer hover:bg-purple-900/80 transition-all duration-300 shadow-lg group rounded-tr-full"
+            className="absolute inset-y-0 left-0 z-20 flex items-center pl-3 pr-4 sm:pl-4 sm:pr-6 bg-gradient-to-r from-gray-800/95 to-gray-800/90 border-r border-white/10 cursor-pointer hover:bg-gray-900/80 transition-all duration-300 shadow-lg group rounded-tr-full"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             prefetch={false}
@@ -325,8 +325,8 @@ export default function Heading({
           </Link>
 
           {/* Masks */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-24 bg-gradient-to-r from-purple-700 to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-24 bg-gradient-to-l from-purple-600 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-24 bg-gradient-to-r from-gray-700 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-24 bg-gradient-to-l from-gray-700 to-transparent z-10" />
 
           {/* Track */}
           <div className="relative">
@@ -363,7 +363,7 @@ export default function Heading({
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full h-1 bg-purple-900/50 overflow-hidden">
+      <div className="w-full h-1 bg-gray-900/50 overflow-hidden">
         <div
           className="h-full bg-gradient-to-r from-yellow-400 to-orange-500 transition-all duration-300"
           style={{

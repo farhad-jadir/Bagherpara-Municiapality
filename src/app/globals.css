@@ -1,6 +1,6 @@
+/* globals.css */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap');
 @import "tailwindcss";
-
 
 :root {
   --background: #ffffff;
@@ -42,11 +42,9 @@ body {
   transition: color 0.3s;
 }
 
-/* globals.css */
-
 /* লাইভ গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড */
 .bg-live-gradient {
-  background: linear-gradient(-45deg, #051b34, #450101, #041f0f, #0e0108, #2b1122);
+  background: linear-gradient(-45deg, #120a23, #0c0c1a, #041f0f, #131325, #2b1122);
   background-size: 400% 400%;
   animation: gradientMove 12s ease infinite;
 }
@@ -70,18 +68,6 @@ body {
   animation: gradientMove 12s ease infinite;
 }
 
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 /* -----------------------------
   Dynamic Button - Global Style
 ----------------------------- */
@@ -91,10 +77,10 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1.25rem; /* py-2 px-5 equivalent */
-  font-size: 0.875rem; /* text-sm */
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  border-radius: 0.5rem; /* rounded-lg */
+  border-radius: 0.5rem;
   border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -104,29 +90,29 @@ body {
 
 /* Default primary color */
 .btn-dynamic.primary {
-  background-color: #4ade80; /* green-400 */
-  color: #000000;
-  border-color: #4ade80;
+  background-color: #f54f07;
+  color: #dfd3d3;
+  border-color: #def46f;
 }
 
 /* Hover effect for primary */
 .btn-dynamic.primary:hover {
-  background-color: #22c55e; /* green-500 */
+  background-color: #22c55e;
   color: #ffffff;
-  border-color: #22c55e;
+  border-color: #c2f564;
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Secondary color variant */
 .btn-dynamic.secondary {
-  background-color: #1f4603; /* yellow-400 */
+  background-color: #1f4603;
   color: #f2adad;
   border-color: #c9f907;
 }
 
 .btn-dynamic.secondary:hover {
-  background-color: #02250c; /* yellow-500 */
+  background-color: #02250c;
   color: #ffffff;
   border-color: #18dd06;
   transform: scale(1.05);
@@ -157,5 +143,4 @@ body {
   transform: translateX(3px);
 }
 
-
-
+/* Notice Board Enhancement Styles */

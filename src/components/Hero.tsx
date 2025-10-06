@@ -40,17 +40,24 @@ const upazilaAdmin = {
 
 export default function Hero() {
   return (
-    <section className="relative bg-live-gradienttow text-white py-8 md:py-12">
+    <section className="relative bg-live-gradient text-white py-8 md:py-12">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-        
-        {/* Notice Card */}
-        <div className="bg-white/10 backdrop-blur-md p-4 md:p-5 rounded-xl shadow-lg flex flex-col border border-white/20">
-          <h1 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">📢 নোটিশ</h1>
+
+        {/* 🔔 Notice Card */}
+        <div className="group bg-white/10 backdrop-blur-md p-4 md:p-5 rounded-xl shadow-lg flex flex-col border border-white/20 
+          transition-all duration-500 hover:bg-white/20 hover:scale-[1.03] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+          
+          <h1 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 group-hover:text-yellow-300 transition-colors duration-300">
+            📢 নোটিশ বোর্ড
+          </h1>
 
           <ul className="space-y-2 md:space-y-3 flex-grow">
             {notices.map((notice) => (
               <li key={notice.id} className="border-b border-white/10 pb-2 last:border-none">
-                <Link href={notice.href} className="text-xs md:text-sm hover:text-yellow-300 block">
+                <Link
+                  href={notice.href}
+                  className="text-xs md:text-sm hover:text-yellow-400 transition-colors duration-300 block"
+                >
                   {notice.text}
                 </Link>
                 <p className="text-xs text-gray-300 mt-1">তারিখ: {notice.date}</p>
@@ -60,28 +67,30 @@ export default function Hero() {
 
           <Link
             href="/notice"
-            className="inline-block btn-dynamic secondary"
+            className="inline-block btn-dynamic secondary mt-4"
           >
             সব নোটিশ দেখুন →
           </Link>
         </div>
 
-        {/* Upazila Admin Card */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg flex flex-col items-center text-center p-4 md:p-5 border border-white/20">
+        {/* 🏛️ Upazila Admin Card */}
+        <div className="group bg-white/10 backdrop-blur-md rounded-xl shadow-lg flex flex-col items-center text-center p-4 md:p-5 border border-white/20 
+          transition-all duration-500 hover:bg-white/20 hover:scale-[1.03] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+          
           <div className="w-full h-40 md:h-56 lg:h-64 relative mb-3 rounded-lg overflow-hidden shadow-lg">
             <Image
               src={upazilaAdmin.img}
               alt={upazilaAdmin.name}
               fill
-              className="object-cover"
-              priority={false}
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
           </div>
 
           <div className="mb-3 flex-1">
-           
-            <h3 className="text-sm font-semibold mt-1">{upazilaAdmin.name}</h3>
+            <h3 className="text-sm font-semibold mt-1 group-hover:text-yellow-300 transition-colors duration-300">
+              {upazilaAdmin.name}
+            </h3>
             <p className="text-xs text-gray-300 mt-1">{upazilaAdmin.role}</p>
           </div>
 
@@ -93,22 +102,24 @@ export default function Hero() {
           </Link>
         </div>
 
-        {/* Municipality Admin Card */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg flex flex-col items-center text-center p-4 md:p-5 border border-white/20">
+        {/* 🏙️ Municipality Admin Card */}
+        <div className="group bg-white/10 backdrop-blur-md rounded-xl shadow-lg flex flex-col items-center text-center p-4 md:p-5 border border-white/20 
+          transition-all duration-500 hover:bg-white/20 hover:scale-[1.03] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+          
           <div className="w-full h-40 md:h-56 lg:h-64 relative mb-3 rounded-lg overflow-hidden shadow-lg">
             <Image
               src={admin.img}
               alt={admin.name}
               fill
-              className="object-cover"
-              priority={false}
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
           </div>
 
           <div className="mb-3 flex-1">
-            
-            <h3 className="text-sm font-semibold mt-1">{admin.name}</h3>
+            <h3 className="text-sm font-semibold mt-1 group-hover:text-yellow-300 transition-colors duration-300">
+              {admin.name}
+            </h3>
             <p className="text-xs text-gray-300 mt-1">{admin.role}</p>
           </div>
 
@@ -116,10 +127,9 @@ export default function Hero() {
             href={admin.messageLink}
             className="block btn-dynamic secondary w-full"
           >
-           পৌরসভা প্রশাসকের বার্তা →
+            পৌরসভা প্রশাসকের বার্তা →
           </Link>
         </div>
-
       </div>
     </section>
   );

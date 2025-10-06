@@ -58,14 +58,14 @@ export default function Navbar() {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden absolute top-10 right-4 z-20 bg-white/10 rounded-full p-2 shadow-md text-white hover:bg-purple-800 transition"
+          className="md:hidden absolute top-10 right-4 z-20 bg-white/10 rounded-full p-2 shadow-md text-white hover:bg-gray-800 transition"
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
       {/* 🔹 Main Navigation */}
-      <div className="bg-gradient-to-r from-purple-700 to-purple-800 shadow-lg">
+      <div className="bg-gradient-to-r from-gray-800 to-gray-700 shadow-lg">
         <div className="container mx-auto px-4">
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center justify-center space-x-1 py-3">

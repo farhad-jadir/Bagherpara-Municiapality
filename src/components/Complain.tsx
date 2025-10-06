@@ -128,22 +128,24 @@ export default function Complain() {
             />
           </div>
 
-          {/* সাবমিট বাটন - Global Button Class Applied */}
-          <button
-            type="submit"
-            className={`btn-dynamic secondary w-full py-3 flex items-center justify-center gap-2 ${
-              activeTab === "complain"
-                ? "bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700"
-                : "bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700"
-            }`}
-          >
-            <Send size={18} />
-            {showIdentityForm
-              ? activeTab === "complain"
-                ? "অভিযোগ জমা দিন"
-                : "প্রস্তাবনা জমা দিন"
-              : "পরবর্তী ধাপ"}
-          </button>
+          {/* ✅ বাটন কেন্দ্রাভিমুখে */}
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className={`btn-dynamic primary w-full sm:w-60 px-6 justify-center gap-2 ${
+                activeTab === "complain"
+                  ? "bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700"
+                  : "bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700"
+              }`}
+            >
+              <Send size={18} />
+              {showIdentityForm
+                ? activeTab === "complain"
+                  ? "অভিযোগ জমা দিন"
+                  : "প্রস্তাবনা জমা দিন"
+                : "পরবর্তী ধাপ"}
+            </button>
+          </div>
         </form>
 
         {/* তথ্য বক্স */}
@@ -180,7 +182,7 @@ export default function Complain() {
               <X size={20} />
             </button>
 
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">
               আপনার পরিচয় তথ্য *
             </h3>
 
@@ -245,13 +247,15 @@ export default function Complain() {
               </div>
             </div>
 
-            {/* মডালের সাবমিট - Global Button Class Applied */}
-            <button
-              onClick={handleSubmit}
-              className="btn-dynamic secondary w-full py-3 mt-5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all"
-            >
-              জমা দিন
-            </button>
+            {/* ✅ মডাল বাটন কেন্দ্রাভিমুখে */}
+            <div className="flex justify-center mt-5">
+              <button
+                onClick={handleSubmit}
+                className="btn-dynamic secondary px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all text-white rounded-lg"
+              >
+                জমা দিন
+              </button>
+            </div>
           </div>
         </div>
       )}
