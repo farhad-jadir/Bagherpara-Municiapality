@@ -57,7 +57,7 @@ export default function MainHeader() {
                 loading="eager"
               />
             </div>
-            
+            <div className="absolute -bottom-1 -right-1 w-4 h-4 md:w-5 md:h-5 bg-green-500 rounded-full border-2 border-white"></div>
           </div>
           <div className="ml-3">
             <h1 className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors">
