@@ -49,15 +49,15 @@ export default function MainHeader() {
         {/* Logo Left */}
         <Link href="/" className="flex items-center group">
           <div className="relative">
-            <div className="w-14 h-14 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+            <div className="w-14 h-14 md:w-17 md:h-17 bg-amber-100/10 rounded-full flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
               <img
                 src="/images/logo2.png"
                 alt="Logo"
-                className="w-12 h-12 md:w-14 md:h-14 object-contain"
+                className="w-12 h-12 md:w-16 md:h-16 object-contain"
                 loading="eager"
               />
             </div>
-            <div className="absolute -bottom-1 -right-1 w-4 h-4 md:w-5 md:h-5 bg-green-500 rounded-full border-2 border-white"></div>
+            
           </div>
           <div className="ml-3">
             <h1 className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors">
