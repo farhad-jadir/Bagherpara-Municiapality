@@ -23,6 +23,7 @@ interface WardInfo {
 export default function Location() {
   const [selectedWard, setSelectedWard] = useState<number>(1);
   const [isMobile, setIsMobile] = useState(false);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -54,6 +55,11 @@ export default function Location() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    // ম্যাপ লোড হওয়ার পর স্টেট আপডেট
+    setMapLoaded(true);
+  }, [selectedWard]);
+
   const wardsData: WardInfo[] = [
     {
       id: 1,
@@ -76,7 +82,7 @@ export default function Location() {
         "কমিউনিটি সেন্টার"
       ],
       areaSize: "২.৫ বর্গ কিমি",
-      coordinates: { lat: 23.2015, lng: 89.0087 }
+      coordinates: { lat: 23.224332355266505, lng: 89.34300601169451 }
     },
     {
       id: 2,
@@ -99,12 +105,12 @@ export default function Location() {
         "গ্রামীণ ব্যাংক"
       ],
       areaSize: "৩.২ বর্গ কিমি",
-      coordinates: { lat: 23.1952, lng: 89.0153 }
+      coordinates: { lat: 23.222371345344797, lng: 89.34715262436174 } 
     },
     {
       id: 3,
       name: "৩নং ওয়ার্ড",
-      area: "মিরপুর ও বাঘারপাড়া (পূর্ব আংশিক",
+      area: "মিরপুর ও বাঘারপাড়া (পূর্ব আংশিক)",
       population: 14200,
       households: 3250,
       councilor: "মোঃ রবিউল ইসলাম",
@@ -122,7 +128,7 @@ export default function Location() {
         "স cooperatives সমিতি"
       ],
       areaSize: "৪.১ বর্গ কিমি",
-      coordinates: { lat: 23.1887, lng: 89.0221 }
+      coordinates: { lat: 23.22326538184236, lng: 89.34802660278245 }
     },
     {
       id: 4,
@@ -145,7 +151,7 @@ export default function Location() {
         "পোষ্ট অফিস"
       ],
       areaSize: "৩.৮ বর্গ কিমি",
-      coordinates: { lat: 23.1823, lng: 89.0298 }
+      coordinates: { lat: 23.220219770679204, lng: 89.34905049711759 }
     },
     {
       id: 5,
@@ -168,7 +174,7 @@ export default function Location() {
         "কৃষি খামার"
       ],
       areaSize: "৪.৫ বর্গ কিমি",
-      coordinates: { lat: 23.1756, lng: 89.0364 }
+      coordinates: { lat: 23.21964522989238, lng: 89.3499340446103 }
     },
     {
       id: 6,
@@ -191,7 +197,7 @@ export default function Location() {
         "খেলার মাঠ"
       ],
       areaSize: "৩.৯ বর্গ কিমি",
-      coordinates: { lat: 23.1692, lng: 89.0437 }
+      coordinates: { lat: 23.217748641487454, lng: 89.34894204724353 }
     },
     {
       id: 7,
@@ -214,7 +220,7 @@ export default function Location() {
         "কৃষি সেবা কেন্দ্র"
       ],
       areaSize: "৩.৬ বর্গ কিমি",
-      coordinates: { lat: 23.1628, lng: 89.0512 }
+      coordinates: { lat: 23.21985534904642, lng: 89.34684956662257 } 
     },
     {
       id: 8,
@@ -237,7 +243,7 @@ export default function Location() {
         "বিনোদন কেন্দ্র"
       ],
       areaSize: "৪.২ বর্গ কিমি",
-      coordinates: { lat: 23.1564, lng: 89.0589 }
+      coordinates: { lat: 23.21885212707627, lng: 89.34448133369943 }
     },
     {
       id: 9,
@@ -260,11 +266,12 @@ export default function Location() {
         "সামাজিক কেন্দ্র"
       ],
       areaSize: "৩.৭ বর্গ কিমি",
-      coordinates: { lat: 23.1501, lng: 89.0665 }
+      coordinates: { lat: 23.213514833740206, lng: 89.344972812754 }
     }
   ];
 
   const selectedWardData = wardsData.find(ward => ward.id === selectedWard);
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
@@ -339,24 +346,65 @@ export default function Location() {
             {/* ম্যাপ ও বিস্তারিত */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden">
-                {/* ম্যাপ প্লেসহোল্ডার */}
-                <div className="bg-gradient-to-br from-green-400 to-blue-500 h-48 md:h-64 relative">
-                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <div className="text-4xl mb-2">🗺️</div>
-                      <h3 className="text-xl md:text-2xl font-bold mb-2">
-                        {selectedWardData?.name} - ম্যাপ
-                      </h3>
-                      <p className="text-sm md:text-base opacity-90">
-                        {selectedWardData?.area}
-                      </p>
+                {/* ওয়ার্ড ভিত্তিক গুগল ম্যাপ */}
+                <div className="w-full h-48 md:h-64 bg-gray-800 relative">
+                  {selectedWardData && apiKey ? (
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      loading="lazy"
+                      allowFullScreen
+                      referrerPolicy="no-referrer-when-downgrade"
+                      src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${selectedWardData.coordinates.lat},${selectedWardData.coordinates.lng}&zoom=15&center=${selectedWardData.coordinates.lat},${selectedWardData.coordinates.lng}`}
+                      title={`${selectedWardData.name} - বাঘারপাড়া পৌরসভা`}
+                      className="transition-opacity duration-300"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
+                      <div className="text-center text-white">
+                        <div className="text-4xl mb-2">🗺️</div>
+                        <h3 className="text-xl md:text-2xl font-bold mb-2">
+                          {selectedWardData?.name} - ম্যাপ
+                        </h3>
+                        <p className="text-sm md:text-base opacity-90">
+                          {selectedWardData?.area}
+                        </p>
+                        {!apiKey && (
+                          <p className="text-xs mt-2 text-red-200">
+                            ম্যাপ লোড করতে API key প্রয়োজন
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* ওয়ার্ড তথ্য ওভারলে */}
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+                    <div className="text-sm md:text-base font-bold text-green-800">
+                      {selectedWardData?.name}
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      স্থানাঙ্ক: {selectedWardData?.coordinates.lat.toFixed(6)}, {selectedWardData?.coordinates.lng.toFixed(6)}
                     </div>
                   </div>
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                    <div className="text-xs md:text-sm font-semibold text-green-800">
-                      স্থানাঙ্ক: {selectedWardData?.coordinates.lat.toFixed(4)}, {selectedWardData?.coordinates.lng.toFixed(4)}
+
+                  {/* গুগল ম্যাপে দেখুন বাটন */}
+                  {selectedWardData && (
+                    <div className="absolute bottom-4 right-4">
+                      <a
+                        href={`https://www.google.com/maps?q=${selectedWardData.coordinates.lat},${selectedWardData.coordinates.lng}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center bg-white text-green-700 px-3 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-sm font-semibold hover:bg-green-50"
+                      >
+                        গুগল ম্যাপে দেখুন
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
                     </div>
-                  </div>
+                  )}
                 </div>
 
                 {/* ওয়ার্ড ডিটেইলস */}
@@ -617,14 +665,7 @@ export default function Location() {
         </div>
       </section>
 
-      {/* ফুটার */}
-      <footer className="bg-green-800 text-white py-8 md:py-12">
-        <div className="container mx-auto px-4 text-center">
-          <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">বাঘারপাড়া পৌরসভা</h3>
-          <p className="text-green-200 mb-2 text-sm md:text-base">ওয়ার্ড ভিত্তিক উন্নয়ন ও সেবা</p>
-          <p className="text-green-300 text-xs md:text-sm">© {new Date().getFullYear()} সকল অধিকার সংরক্ষিত</p>
-        </div>
-      </footer>
+
 
       <style jsx global>{`
         @keyframes fadeIn {
