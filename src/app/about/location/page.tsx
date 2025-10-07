@@ -58,7 +58,7 @@ export default function Location() {
     {
       id: 1,
       name: "১নং ওয়ার্ড",
-      area: "বাঘারপাড়া সদর (উত্তর অংশ)",
+      area: "বাঘারপাড়া সদর (পশ্চিম আংশিক)",
       population: 18500,
       households: 4250,
       councilor: "মোঃ শহীদুল ইসলাম",
@@ -81,14 +81,14 @@ export default function Location() {
     {
       id: 2,
       name: "২নং ওয়ার্ড",
-      area: "বাংলাবাড়ী এলাকা",
+      area: "বাঘারপাড়া সদর (পূর্ব আংশিক)",
       population: 16700,
       households: 3850,
       councilor: "মোঃ জাহাঙ্গীর আলম",
       contact: "০১৮২XXXXXXX",
       landmarks: [
-        "বাংলাবাড়ী বাজার",
-        "বাংলাবাড়ী মসজিদ",
+        "বাঘারপাড়া বাজার",
+        "বাঘারপাড়া মসজিদ",
         "প্রাথমিক বিদ্যালয়",
         "কমিউনিটি ক্লিনিক"
       ],
@@ -104,13 +104,13 @@ export default function Location() {
     {
       id: 3,
       name: "৩নং ওয়ার্ড",
-      area: "জামজামি ও পার্শ্ববর্তী",
+      area: "মিরপুর ও বাঘারপাড়া (পূর্ব আংশিক",
       population: 14200,
       households: 3250,
       councilor: "মোঃ রবিউল ইসলাম",
       contact: "০১৯২XXXXXXX",
       landmarks: [
-        "জামজামি বাজার",
+        "বাঘারপাড়া বাজার",
         "নদী ঘাট",
         "মাধ্যমিক বিদ্যালয়",
         "কৃষি অফিস"
@@ -127,13 +127,13 @@ export default function Location() {
     {
       id: 4,
       name: "৪নং ওয়ার্ড",
-      area: "খোজপুর ও আশেপাশে",
+      area: "দোহাকুলা আংশিক",
       population: 15800,
       households: 3650,
       councilor: "মোঃ সোহেল রানা",
       contact: "০১৬২XXXXXXX",
       landmarks: [
-        "খোজপুর হাট",
+        "দোহাকুলা",
         "স্বাস্থ্য উপকেন্দ্র",
         "কলেজ",
         "বাস স্ট্যান্ড"
@@ -150,13 +150,13 @@ export default function Location() {
     {
       id: 5,
       name: "৫নং ওয়ার্ড",
-      area: "দড়িয়াপুর এলাকা",
+      area: "দোহাকুলা আংশিক",
       population: 13900,
       households: 3150,
       councilor: "মোঃ ইকবাল হোসেন",
       contact: "০১৫২XXXXXXX",
       landmarks: [
-        "দড়িয়াপুর বাজার",
+        "দোহাকুলা বাজার",
         "নদী ব্রিজ",
         "প্রাইমারি স্কুল",
         "মন্দির"
@@ -172,14 +172,14 @@ export default function Location() {
     },
     {
       id: 6,
-      name: "৬নং ওয়ার্ড",
-      area: "ফুলহরি ও পার্শ্ববর্তী",
+      name: "৬ নং ওয়ার্ড",
+      area: "দোহাকুলা ও পার্শ্ববর্তী",
       population: 14600,
       households: 3350,
       councilor: "মোঃ আলমগীর হোসেন",
       contact: "০১৩২XXXXXXX",
       landmarks: [
-        "ফুলহরি বাজার",
+        "দোহাকুলা বাজার",
         "কমিউনিটি সেন্টার",
         "হাই স্কুল",
         "নদী পার"
@@ -195,14 +195,14 @@ export default function Location() {
     },
     {
       id: 7,
-      name: "৭নং ওয়ার্ড",
-      area: "বাহাদুরপুর এলাকা",
+      name: "৭ নং ওয়ার্ড",
+      area: "দোহাকুলা এলাকা",
       population: 16200,
       households: 3750,
       councilor: "মোঃ সাজ্জাদ হোসেন",
       contact: "০১৪২XXXXXXX",
       landmarks: [
-        "বাহাদুরপুর মার্কেট",
+        "দোহাকুলা বাজার",
         "মসজিদ",
         "প্রাইমারি স্কুল",
         "কৃষি ফার্ম"
@@ -218,15 +218,15 @@ export default function Location() {
     },
     {
       id: 8,
-      name: "৮নং ওয়ার্ড",
-      area: "নরিন্দ্রপুর ও আশেপাশে",
+      name: "৮ নং ওয়ার্ড",
+      area: "মহিরন ও আশেপাশে",
       population: 15300,
       households: 3550,
       councilor: "মোঃ নাজমুল হক",
       contact: "০১২২XXXXXXX",
       landmarks: [
-        "নরিন্দ্রপুর হাট",
-        "স্বাস্থ্য ক্লিনিক",
+        "চৌরাস্তা বাজার",
+        "উপজেলা স্বাস্থ্য কমপ্লেক্স",
         "মাধ্যমিক বিদ্যালয়",
         "নদী বাঁধ"
       ],
@@ -241,14 +241,14 @@ export default function Location() {
     },
     {
       id: 9,
-      name: "৯নং ওয়ার্ড",
-      area: "জুগ্নি ও পার্শ্ববর্তী",
+      name: "৯ নং ওয়ার্ড",
+      area: "মহিরন ও পার্শ্ববর্তী",
       population: 14800,
       households: 3450,
       councilor: "মোঃ আশরাফুল ইসলাম",
       contact: "০১১২XXXXXXX",
       landmarks: [
-        "জুগ্নি বাজার",
+        "প্রশিকা মোড়",
         "প্রাথমিক বিদ্যালয়",
         "মসজিদ",
         "কমিউনিটি হল"
