@@ -32,6 +32,7 @@ export default function Complain() {
 
   const [showIdentityForm, setShowIdentityForm] = useState(false);
   const [activeTab, setActiveTab] = useState<"complain" | "prevention">("complain");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (field: keyof UserData, value: string) => {
     setUserData((prev) => ({
@@ -40,7 +41,7 @@ export default function Complain() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!showIdentityForm) {
@@ -53,17 +54,60 @@ export default function Complain() {
       return;
     }
 
-    console.log("জমা দেওয়া হয়েছে:", { ...userData, type: activeTab });
-    alert(`আপনার ${activeTab === "complain" ? "অভিযোগ" : "প্রস্তাবনা"} সফলভাবে জমা দেওয়া হয়েছে!`);
+    setIsSubmitting(true);
 
-    setUserData({
-      name: "",
-      phone: "",
-      email: "",
-      address: "",
-      complain: "",
-    });
-    setShowIdentityForm(false);
+    try {
+      // EmailJS এর মাধ্যমে ইমেইল পাঠানো
+      const emailData = {
+        service_id: 'service_1y71ien',
+        template_id: 'template_wq5f70q',
+        user_id: 'fSjXpODKqMPktWl3S',
+        template_params: {
+          name: userData.name,
+          email: userData.email || "N/A",
+          phone: userData.phone,
+          message: userData.complain,
+          type: activeTab === "complain" ? "অভিযোগ" : "প্রতিরোধ ব্যবস্থা",
+          address: userData.address,
+          date: new Date().toLocaleString('bn-BD', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          })
+        }
+      };
+
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      });
+
+      if (response.ok) {
+        alert(`আপনার ${activeTab === "complain" ? "অভিযোগ" : "প্রস্তাবনা"} সফলভাবে জমা দেওয়া হয়েছে!`);
+
+        // ফর্ম রিসেট
+        setUserData({
+          name: "",
+          phone: "",
+          email: "",
+          address: "",
+          complain: "",
+        });
+        setShowIdentityForm(false);
+      } else {
+        throw new Error('ইমেইল পাঠানো ব্যর্থ হয়েছে');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('বার্তা পাঠানো ব্যর্থ হয়েছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -132,18 +176,28 @@ export default function Complain() {
           <div className="flex justify-center">
             <button
               type="submit"
+              disabled={isSubmitting}
               className={`btn-dynamic primary w-full sm:w-60 px-6 justify-center gap-2 ${
                 activeTab === "complain"
                   ? "bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700"
                   : "bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700"
-              }`}
+              } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              <Send size={18} />
-              {showIdentityForm
-                ? activeTab === "complain"
-                  ? "অভিযোগ জমা দিন"
-                  : "প্রস্তাবনা জমা দিন"
-                : "পরবর্তী ধাপ"}
+              {isSubmitting ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  পাঠানো হচ্ছে...
+                </>
+              ) : (
+                <>
+                  <Send size={18} />
+                  {showIdentityForm
+                    ? activeTab === "complain"
+                      ? "অভিযোগ জমা দিন"
+                      : "প্রস্তাবনা জমা দিন"
+                    : "পরবর্তী ধাপ"}
+                </>
+              )}
             </button>
           </div>
         </form>
@@ -251,9 +305,19 @@ export default function Complain() {
             <div className="flex justify-center mt-5">
               <button
                 onClick={handleSubmit}
-                className="btn-dynamic secondary px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all text-white rounded-lg"
+                disabled={isSubmitting}
+                className={`btn-dynamic secondary px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all text-white rounded-lg ${
+                  isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
-                জমা দিন
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    পাঠানো হচ্ছে...
+                  </>
+                ) : (
+                  "জমা দিন"
+                )}
               </button>
             </div>
           </div>

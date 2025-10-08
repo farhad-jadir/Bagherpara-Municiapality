@@ -667,18 +667,18 @@ export default function Location() {
 
 
 
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-          animation: fadeIn 0.8s ease-out forwards;
-        }
-        .fade-in {
-          opacity: 0;
-        }
-      `}</style>
-    </div>
-  );
-}
+        <style jsx global>{`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+          }
+          .fade-in {
+            opacity: 0;
+          }
+        `}</style>
+      </div>
+    );
+  }
