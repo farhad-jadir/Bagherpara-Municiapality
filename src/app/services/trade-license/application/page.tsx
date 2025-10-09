@@ -15,13 +15,39 @@ interface ApplicationData {
   timestamp: string;
 }
 
+interface FormData {
+  // Personal Information
+  fullName: string;
+  fatherName: string;
+  motherName: string;
+  nid: string;
+  dateOfBirth: string;
+  phone: string;
+  email: string;
+
+  // Business Information
+  businessName: string;
+  tradeName: string;
+  businessAddress: string;
+  permanentAddress: string;
+  businessNature: string;
+
+  // Documents
+  hasTradeLicense: boolean;
+  hasTinCertificate: boolean;
+  hasBankAccount: boolean;
+
+  // Agreement
+  agreeToTerms: boolean;
+}
+
 export default function LicenseApplication() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const licenseType = searchParams.get('type') || 'new';
 
   const [applicationData, setApplicationData] = useState<ApplicationData | null>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     // Personal Information
     fullName: "",
     fatherName: "",
@@ -55,7 +81,7 @@ export default function LicenseApplication() {
     }
   }, []);
 
-  const handleInputChange = (field: string, value: any) => {
+  const handleInputChange = (field: keyof FormData, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -79,14 +105,14 @@ export default function LicenseApplication() {
     router.push('/services/trade-license/application/success');
   };
 
-  const businessTypeLabels = {
+  const businessTypeLabels: Record<string, string> = {
     retail: "খুচরা ব্যবসা",
     wholesale: "পাইকারি ব্যবসা", 
     industry: "শিল্প প্রতিষ্ঠান",
     service: "সেবা প্রতিষ্ঠান"
   };
 
-  const businessSizeLabels = {
+  const businessSizeLabels: Record<string, string> = {
     small: "ছোট",
     medium: "মাঝারি", 
     large: "বড়"
@@ -125,11 +151,11 @@ export default function LicenseApplication() {
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <span className="text-gray-600">ব্যবসার ধরন:</span>
-                    <p className="font-semibold">{businessTypeLabels[applicationData.businessType as keyof typeof businessTypeLabels]}</p>
+                    <p className="font-semibold">{businessTypeLabels[applicationData.businessType]}</p>
                   </div>
                   <div>
                     <span className="text-gray-600">ব্যবসার আকার:</span>
-                    <p className="font-semibold">{businessSizeLabels[applicationData.businessSize as keyof typeof businessSizeLabels]}</p>
+                    <p className="font-semibold">{businessSizeLabels[applicationData.businessSize]}</p>
                   </div>
                   <div>
                     <span className="text-gray-600">লাইসেন্স ধরন:</span>

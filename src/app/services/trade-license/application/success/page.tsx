@@ -4,11 +4,41 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+interface ApplicationData {
+  businessType: string;
+  businessSize: string;
+  licenseType: string;
+  duration: string;
+  calculatedFee: number;
+  onlineDiscount: number;
+  finalAmount: number;
+  timestamp: string;
+}
+
+interface FormData {
+  fullName: string;
+  fatherName: string;
+  motherName: string;
+  nid: string;
+  dateOfBirth: string;
+  phone: string;
+  email: string;
+  businessName: string;
+  tradeName: string;
+  businessAddress: string;
+  permanentAddress: string;
+  businessNature: string;
+  hasTradeLicense: boolean;
+  hasTinCertificate: boolean;
+  hasBankAccount: boolean;
+  agreeToTerms: boolean;
+}
+
 interface SubmittedApplication {
   applicationId: string;
   submittedAt: string;
-  formData: any;
-  applicationData: any;
+  formData: FormData;
+  applicationData: ApplicationData;
 }
 
 export default function ApplicationSuccess() {
