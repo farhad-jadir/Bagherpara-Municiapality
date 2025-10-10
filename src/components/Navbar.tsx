@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import AboutSubmenu from "./AboutSubmenu";
 import OfficersSubmenu from "./OfficersSubmenu";
 import ServicesSubmenu from "./ServicesSubmenu";
@@ -13,7 +12,7 @@ import ContactSubmenu from "./ContactSubmenu";
 import FaqSubmenu from "./FaqSubmenu";
 import PlansSubmenu from "./PlansSubmenu";
 import Logo from "./Logo";
-import { Globe, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 interface MenuItem {
   title: string;
@@ -24,8 +23,6 @@ export default function Navbar() {
   const [active, setActive] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const [language, setLanguage] = useState<"bn" | "en">("bn");
-  const router = useRouter();
 
   const menuItems: MenuItem[] = [];
 
@@ -37,11 +34,15 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleLanguage = () => setLanguage(language === "bn" ? "en" : "bn");
-
   // 🔹 যখন সাবমেনু থেকে কিছু সিলেক্ট হবে তখন মোবাইল মেনু হাইড করবে
   const handleSubmenuSelect = () => {
     setMenuOpen(false);
+  };
+
+  // 🔹 সাবমেনু ক্লিক হ্যান্ডলার - শুধুমাত্র ক্লিক করলে ওপেন হবে
+  const handleSubmenuClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
   };
 
   return (
@@ -69,15 +70,15 @@ export default function Navbar() {
         <div className="container mx-auto px-4">
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center justify-center space-x-1 py-3">
-            <li><AboutSubmenu /></li>
-            <li><OfficersSubmenu /></li>
-            <li><ServicesSubmenu /></li>
-            <li><LawsSubmenu /></li>
-            <li><FormsSubmenu /></li>
-            <li><GallerySubmenu /></li>
-            <li><ContactSubmenu /></li>
-            <li><FaqSubmenu /></li>
-            <li><PlansSubmenu /></li>
+            <li onClick={handleSubmenuClick}><AboutSubmenu /></li>
+            <li onClick={handleSubmenuClick}><OfficersSubmenu /></li>
+            <li onClick={handleSubmenuClick}><ServicesSubmenu /></li>
+            <li onClick={handleSubmenuClick}><LawsSubmenu /></li>
+            <li onClick={handleSubmenuClick}><FormsSubmenu /></li>
+            <li onClick={handleSubmenuClick}><GallerySubmenu /></li>
+            <li onClick={handleSubmenuClick}><ContactSubmenu /></li>
+            <li onClick={handleSubmenuClick}><FaqSubmenu /></li>
+            <li onClick={handleSubmenuClick}><PlansSubmenu /></li>
           </ul>
 
           {/* Mobile Menu */}

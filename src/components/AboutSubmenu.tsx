@@ -17,7 +17,6 @@ interface AboutSubmenuProps {
 export default function AboutSubmenu({ onSelect }: AboutSubmenuProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const submenuItems: SubmenuItem[] = [
@@ -55,25 +54,11 @@ export default function AboutSubmenu({ onSelect }: AboutSubmenuProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
-  const handleMouseEnter = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    if (!isMobile) {
-      setIsOpen(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (!isMobile) {
-      timeoutRef.current = setTimeout(() => {
-        setIsOpen(false);
-      }, 250); // Reduced from 300ms to match FAQ
-    }
-  };
-
-  const handleToggle = () => {
-    if (isMobile) {
-      setIsOpen(!isOpen);
-    }
+  // 🔹 শুধুমাত্র ক্লিক ইভেন্ট হ্যান্ডলার
+  const handleToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpen(!isOpen);
   };
 
   const handleItemClick = () => {
@@ -85,8 +70,6 @@ export default function AboutSubmenu({ onSelect }: AboutSubmenuProps) {
     <div
       ref={menuRef}
       className="relative select-none"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       {/* 🔹 Main Button - Improved hover effects */}
       <button
@@ -112,7 +95,7 @@ export default function AboutSubmenu({ onSelect }: AboutSubmenuProps) {
             আমাদের সম্পর্কে
           </span>
 
-          {/* Mobile Dropdown Arrow */}
+          {/* 🔹 শুধুমাত্র মোবাইলের জন্য ড্রপডাউন অ্যারো */}
           {isMobile && (
             <svg
               className={`w-4 h-4 ml-2 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
@@ -140,8 +123,6 @@ export default function AboutSubmenu({ onSelect }: AboutSubmenuProps) {
           className="absolute md:absolute top-full left-0 md:left-0 mt-0 md:mt-2 
                      w-full md:min-w-80 bg-white rounded-none md:rounded-lg shadow-xl border border-gray-200 
                      z-50 max-h-[80vh] md:max-h-none overflow-y-auto md:overflow-visible"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
         >
           <div className="p-3 md:p-4">
             <h3 className="text-base md:text-lg font-bold text-gray-800 mb-3 border-b pb-2">

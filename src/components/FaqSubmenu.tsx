@@ -17,7 +17,6 @@ interface FaqSubmenuProps {
 export default function FaqSubmenu({ onSelect }: FaqSubmenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const submenuItems: SubmenuItem[] = [
@@ -44,17 +43,11 @@ export default function FaqSubmenu({ onSelect }: FaqSubmenuProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
-  const handleMouseEnter = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    if (!isMobile) setIsOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    if (!isMobile) timeoutRef.current = setTimeout(() => setIsOpen(false), 250);
-  };
-
-  const handleToggle = () => {
-    if (isMobile) setIsOpen(!isOpen);
+  // 🔹 শুধুমাত্র ক্লিক ইভেন্ট হ্যান্ডলার
+  const handleToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpen(!isOpen);
   };
 
   const handleSelect = () => {
@@ -66,8 +59,6 @@ export default function FaqSubmenu({ onSelect }: FaqSubmenuProps) {
     <div
       ref={menuRef}
       className="relative select-none"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       {/* 🔹 Main Button */}
       <button
@@ -93,7 +84,7 @@ export default function FaqSubmenu({ onSelect }: FaqSubmenuProps) {
             FAQ
           </span>
 
-          {/* Mobile Dropdown Arrow */}
+          {/* 🔹 শুধুমাত্র মোবাইলের জন্য ড্রপডাউন অ্যারো */}
           {isMobile && (
             <svg
               className={`w-4 h-4 ml-2 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
