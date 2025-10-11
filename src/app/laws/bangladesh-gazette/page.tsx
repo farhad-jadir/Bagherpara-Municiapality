@@ -1,23 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Search, 
   Calendar, 
-  Download, 
   ExternalLink, 
   BookOpen, 
   FileText, 
   Building2,
-  Filter,
   Clock,
   AlertCircle,
   ChevronRight,
   Play,
   Shield,
-  Users,
-  Mail
+  Users
 } from "lucide-react";
 
 export default function BangladeshGazette() {
@@ -158,7 +155,7 @@ export default function BangladeshGazette() {
                 দ্রুত লিঙ্ক
               </h3>
               <div className="space-y-3">
-                {quickLinks.map((link, index) => (
+                {quickLinks.map((link) => (
                   <motion.a
                     key={link.title}
                     href={link.url}
@@ -194,9 +191,9 @@ export default function BangladeshGazette() {
                   সাম্প্রতিক খোঁজা
                 </h3>
                 <div className="space-y-2">
-                  {searchHistory.map((term, index) => (
+                  {searchHistory.map((term) => (
                     <button
-                      key={index}
+                      key={term}
                       onClick={() => setQuery(term)}
                       className="w-full text-left p-2 rounded-lg hover:bg-gray-50 transition-colors text-sm"
                     >
@@ -359,12 +356,11 @@ export default function BangladeshGazette() {
                       exit={{ opacity: 0 }}
                     >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {features.map((feature, index) => (
+                        {features.map((feature) => (
                           <motion.div
                             key={feature.title}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
                             className="flex items-start gap-4 p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all"
                           >
                             <div className="p-3 bg-blue-100 rounded-lg text-blue-600">
@@ -404,8 +400,8 @@ export default function BangladeshGazette() {
 
                         <h4 className="font-semibold">ঐতিহাসিক পটভূমি</h4>
                         <p>
-                          গেজেটটির ইতিহাস ১৯৪৭ সালের 'Dacca Gazette' থেকে শুরু করে; স্বাধীন বাংলাদেশের পর 
-                          ১৯৭৩ সালে 'The Bangladesh Gazette' রূপে প্রতিষ্ঠিত হয়।
+                          গেজেটটির ইতিহাস ১৯৪৭ সালের &apos;Dacca Gazette&apos; থেকে শুরু করে; স্বাধীন বাংলাদেশের পর 
+                          ১৯৭৩ সালে &apos;The Bangladesh Gazette&apos; রূপে প্রতিষ্ঠিত হয়।
                         </p>
                       </div>
                     </motion.div>
